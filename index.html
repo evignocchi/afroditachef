@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Afrodita Chef · Ristorante a Bologna</title>
+  <meta name="description" content="Afrodita Chef, ristorante in Via Rialto 1b a Bologna. Cibo per passione. Prenota il tuo tavolo su WhatsApp.">
+  <meta name="theme-color" content="#F3A6CB">
+  <meta property="og:title" content="Afrodita Chef · Bologna">
+  <meta property="og:description" content="Cibo per passione. Via Rialto 1b, Bologna.">
+  <meta property="og:image" content="assets/piatto.jpg">
+  <link rel="icon" href="assets/logo-mark.png">
+  <link rel="preload" href="fonts/YoungSerif-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="fonts/HankenGrotesk-Variable.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Shared lamp drawing: pink polka-dot scalloped shade. Colours come from CSS variables. -->
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+  <defs>
+    <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
+      <circle cx="5" cy="5" r="3.2" style="fill:var(--dot, #fff)"/>
+      <circle cx="16" cy="16" r="3.2" style="fill:var(--dot, #fff)"/>
+    </pattern>
+  </defs>
+  <symbol id="lamp" viewBox="0 0 260 300">
+    <line x1="130" y1="0" x2="130" y2="58" style="stroke:var(--cord, #3B1830)" stroke-width="3"/>
+    <rect x="121" y="54" width="18" height="16" rx="4" style="fill:var(--cord, #3B1830)"/>
+    <path id="shade" d="M130 66 C 96 66 62 104 28 214 a 15.5 15 0 0 0 31 0 a 15.5 15 0 0 0 31 0 a 15.5 15 0 0 0 31 0 a 15.5 15 0 0 0 31 0 a 15.5 15 0 0 0 31 0 a 15.5 15 0 0 0 31 0 a 15.5 15 0 0 0 31 0 C 198 104 164 66 130 66 Z" style="fill:var(--shade, #E774B3)"/>
+    <path d="M130 66 C 96 66 62 104 28 214 a 15.5 15 0 0 0 31 0 a 15.5 15 0 0 0 31 0 a 15.5 15 0 0 0 31 0 a 15.5 15 0 0 0 31 0 a 15.5 15 0 0 0 31 0 a 15.5 15 0 0 0 31 0 a 15.5 15 0 0 0 31 0 C 198 104 164 66 130 66 Z" fill="url(#dots)"/>
+    <ellipse cx="130" cy="212" rx="96" ry="9" style="fill:var(--rim, #FFE9A8);opacity:var(--lit, .9)"/>
+    <circle cx="130" cy="244" r="15" style="fill:var(--bulb, #FFE9A8);opacity:var(--lit, .9)"/>
+  </symbol>
+</svg>
+
+<a class="skip" href="#prenota"><span lang="it">Vai alla prenotazione</span><span lang="en">Skip to booking</span></a>
+
+<header class="site-header" id="top">
+  <a class="brand" href="#top" aria-label="Afrodita Chef">
+    <img src="assets/logo-mark.png" alt="" width="44" height="44">
+    <span class="brand-word">AFRODITACHEF</span>
+  </a>
+  <nav class="nav" id="nav" aria-label="Menu principale">
+    <a href="#locale"><span lang="it">Il locale</span><span lang="en">The room</span></a>
+    <a href="#piatti"><span lang="it">Piatti</span><span lang="en">Dishes</span></a>
+    <a href="#menu">Menu</a>
+    <a href="#dove"><span lang="it">Dove</span><span lang="en">Find us</span></a>
+  </nav>
+  <div class="header-actions">
+    <div class="lang" role="group" aria-label="Lingua / Language">
+      <button type="button" data-set-lang="it" aria-pressed="true">IT</button>
+      <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <a class="btn btn-small" href="#prenota"><span lang="it">Prenota</span><span lang="en">Book</span></a>
+    <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="nav">
+      <span class="sr"><span lang="it">Apri il menu</span><span lang="en">Open menu</span></span>
+      <i></i><i></i>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-lamp" aria-hidden="true">
+      <div class="halo"></div>
+      <svg class="lamp-svg" viewBox="0 0 260 300"><use href="#lamp"/></svg>
+    </div>
+
+    <div class="hero-copy">
+      <h1 id="hero-title">
+        <span lang="it"><span class="l1">Cibo</span> <span class="l2">per</span> <span class="l3">passione.</span></span>
+        <span lang="en"><span class="l1">Food</span> <span class="l2">made with</span> <span class="l3">passion.</span></span>
+      </h1>
+      <p class="lede">
+        <span lang="it">Un piccolo ristorante in Via Rialto, a Bologna. Paste, piatti di stagione e tavoli apparecchiati di rosa.</span>
+        <span lang="en">A small restaurant on Via Rialto, in Bologna. Pasta, seasonal plates and tables set in pink.</span>
+      </p>
+      <div class="cta-row">
+        <a class="btn" href="#prenota">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+          <span lang="it">Prenota su WhatsApp</span><span lang="en">Book on WhatsApp</span>
+        </a>
+        <a class="link-arrow" href="#menu"><span lang="it">Guarda il menu</span><span lang="en">See the menu</span><span aria-hidden="true"> →</span></a>
+      </div>
+    </div>
+
+    <figure class="hero-arch">
+      <img src="assets/piatto.jpg" alt="Orecchiette verdi con salsiccia, cialde croccanti di formaggio e un fiore edibile rosso" width="745" height="990" fetchpriority="high">
+      <svg class="badge" viewBox="0 0 160 160" aria-hidden="true">
+        <defs><path id="circ" d="M80,80 m-58,0 a58,58 0 1,1 116,0 a58,58 0 1,1 -116,0"/></defs>
+        <circle cx="80" cy="80" r="78" style="fill:var(--verde)"/>
+        <text><textPath href="#circ" startOffset="0" textLength="358" lengthAdjust="spacing">VIA RIALTO 1B · BOLOGNA · CIBO PER PASSIONE ·</textPath></text>
+        <path d="M80 112 C 40 88 48 52 66 52 C 74 52 80 58 80 64 C 80 58 86 52 94 52 C 112 52 120 88 80 112 Z" style="fill:var(--rosa)"/>
+      </svg>
+    </figure>
+  </section>
+
+  <!-- LOCALE -->
+  <section class="locale scallop" id="locale" aria-labelledby="locale-title" style="--c: var(--muro)">
+    <div class="locale-copy">
+      <h2 id="locale-title">
+        <span lang="it">Strisce sui muri, pois sulle lampade, una sala rosa in fondo.</span>
+        <span lang="en">Striped walls, polka-dot lamps and a pink room at the back.</span>
+      </h2>
+      <p>
+        <span lang="it">Il locale è piccolo e si vede tutto subito: i tavoli di legno chiaro, le sedie bianche, il bancone che si affaccia sulla cucina. Ci si siede, si guarda cosa esce dal passe e si sceglie di conseguenza.</span>
+        <span lang="en">The place is small and you take it in at a glance: pale wooden tables, white chairs, a counter that looks onto the kitchen. Sit down, watch what comes off the pass, and order accordingly.</span>
+      </p>
+      <a class="link-arrow" href="#prenota"><span lang="it">Scegli il tuo tavolo</span><span lang="en">Pick your table</span><span aria-hidden="true"> →</span></a>
+    </div>
+    <div class="locale-mosaic">
+      <figure class="m-tall reveal">
+        <img src="assets/locale.jpg" alt="La sala: pareti a righe beige, lampada verde a pois, tavoli in legno e il bancone sulla destra" width="573" height="1020" loading="lazy">
+      </figure>
+      <figure class="m-round reveal">
+        <img src="assets/locale-lampada.jpg" alt="Lampada a pois verde appesa al soffitto" width="240" height="250" loading="lazy">
+      </figure>
+      <figure class="m-rect reveal">
+        <img src="assets/locale-banco.jpg" alt="Il bancone in legno con sgabelli e la cucina sullo sfondo" width="403" height="380" loading="lazy">
+      </figure>
+    </div>
+  </section>
+
+  <!-- PIATTI -->
+  <section class="piatti scallop" id="piatti" aria-labelledby="piatti-title" style="--c: var(--blush)">
+    <figure class="plate reveal">
+      <img src="assets/piatto.jpg" alt="Orecchiette con salsa verde, salsiccia, cialde di formaggio e fiore edibile" width="745" height="990" loading="lazy">
+      <ul class="notes" aria-label="Ingredienti / Ingredients">
+        <li class="n1"><span lang="it">fiore edibile</span><span lang="en">edible flower</span></li>
+        <li class="n2"><span lang="it">cialde croccanti di formaggio</span><span lang="en">crisp cheese wafers</span></li>
+        <li class="n3"><span lang="it">orecchiette</span><span lang="en">orecchiette</span></li>
+        <li class="n4"><span lang="it">salsiccia</span><span lang="en">sausage</span></li>
+      </ul>
+    </figure>
+    <div class="piatti-copy">
+      <h2 id="piatti-title">
+        <span lang="it">Un piatto, pezzo per pezzo.</span>
+        <span lang="en">One plate, piece by piece.</span>
+      </h2>
+      <p>
+        <span lang="it">Orecchiette in salsa verde con salsiccia sgranata, cialde di formaggio croccanti e un fiore sopra. Il colore è parte del piatto, e lo si capisce dalla foto.</span>
+        <span lang="en">Orecchiette in a green sauce with crumbled sausage, crisp cheese wafers and a flower on top. The colour is part of the dish, and the photo shows it.</span>
+      </p>
+      <div class="detail-strip">
+        <figure class="reveal"><img src="assets/piatto-fiore.jpg" alt="Dettaglio del fiore edibile" width="310" height="300" loading="lazy"></figure>
+        <figure class="reveal"><img src="assets/piatto-croccante.jpg" alt="Dettaglio delle cialde croccanti" width="420" height="460" loading="lazy"></figure>
+        <figure class="reveal"><img src="assets/piatto-orecchiette.jpg" alt="Dettaglio delle orecchiette" width="765" height="520" loading="lazy"></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu scallop" id="menu" aria-labelledby="menu-title" style="--c: var(--verde)">
+    <div class="menu-head">
+      <h2 id="menu-title">Menu</h2>
+      <p class="menu-note">
+        <span lang="it">Menu indicativo: cambia con le stagioni. Chiedi in sala le novità e, se hai allergie, dillo prima di ordinare.</span>
+        <span lang="en">Sample menu: it changes with the seasons. Ask in the room for what's new, and tell us about allergies before you order.</span>
+      </p>
+    </div>
+    <div class="menu-grid">
+      <div class="course">
+        <h3><span lang="it">Antipasti</span><span lang="en">Starters</span></h3>
+        <dl>
+          <dt><span lang="it">Crescentine con salumi</span><span lang="en">Crescentine with cured meats</span></dt>
+          <dd><span lang="it">Pane fritto emiliano, salumi tagliati al momento.</span><span lang="en">Fried Emilian bread, cured meats sliced to order.</span></dd>
+          <dt><span lang="it">Tortino di zucca</span><span lang="en">Pumpkin tart</span></dt>
+          <dd><span lang="it">Fonduta di Parmigiano e semi tostati.</span><span lang="en">Parmigiano cream and toasted seeds.</span></dd>
+          <dt><span lang="it">Verdure di stagione</span><span lang="en">Seasonal vegetables</span></dt>
+          <dd><span lang="it">In pastella leggera, con salsa allo yogurt.</span><span lang="en">In a light batter, with yoghurt sauce.</span></dd>
+        </dl>
+      </div>
+      <div class="course">
+        <h3><span lang="it">Primi</span><span lang="en">Pasta</span></h3>
+        <dl>
+          <dt><span lang="it">Orecchiette, cime di rapa e salsiccia</span><span lang="en">Orecchiette, turnip tops and sausage</span> <em class="pic"><span lang="it">in foto</span><span lang="en">pictured</span></em></dt>
+          <dd><span lang="it">Cialde di formaggio croccanti e fiore edibile.</span><span lang="en">Crisp cheese wafers and an edible flower.</span></dd>
+          <dt><span lang="it">Tagliatelle al ragù</span><span lang="en">Tagliatelle with ragù</span></dt>
+          <dd><span lang="it">Ragù alla bolognese, cotto piano.</span><span lang="en">Bolognese ragù, slow-cooked.</span></dd>
+          <dt><span lang="it">Tortellini in brodo</span><span lang="en">Tortellini in broth</span></dt>
+          <dd><span lang="it">Brodo di carne, tortellini ripieni.</span><span lang="en">Meat broth, filled tortellini.</span></dd>
+        </dl>
+      </div>
+      <div class="course">
+        <h3><span lang="it">Secondi</span><span lang="en">Mains</span></h3>
+        <dl>
+          <dt><span lang="it">Cotoletta alla bolognese</span><span lang="en">Bolognese veal cutlet</span></dt>
+          <dd><span lang="it">Prosciutto crudo e Parmigiano Reggiano.</span><span lang="en">Prosciutto and Parmigiano Reggiano.</span></dd>
+          <dt><span lang="it">Tagliata di manzo</span><span lang="en">Sliced beef</span></dt>
+          <dd><span lang="it">Rucola, scaglie di grana, aceto balsamico.</span><span lang="en">Rocket, grana shavings, balsamic vinegar.</span></dd>
+          <dt><span lang="it">Parmigiana di melanzane</span><span lang="en">Aubergine parmigiana</span></dt>
+          <dd><span lang="it">Pomodoro, basilico, mozzarella.</span><span lang="en">Tomato, basil, mozzarella.</span></dd>
+        </dl>
+      </div>
+      <div class="course">
+        <h3><span lang="it">Dolci</span><span lang="en">Desserts</span></h3>
+        <dl>
+          <dt><span lang="it">Zuppa inglese</span><span lang="en">Zuppa inglese</span></dt>
+          <dd><span lang="it">Crema, cioccolato e Alchermes, come a Bologna.</span><span lang="en">Custard, chocolate and Alchermes, Bolognese style.</span></dd>
+          <dt><span lang="it">Tiramisù</span><span lang="en">Tiramisù</span></dt>
+          <dd><span lang="it">Mascarpone, caffè, cacao.</span><span lang="en">Mascarpone, coffee, cocoa.</span></dd>
+          <dt><span lang="it">Panna cotta</span><span lang="en">Panna cotta</span></dt>
+          <dd><span lang="it">Con frutti di bosco.</span><span lang="en">With berries.</span></dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRENOTA -->
+  <section class="book scallop" id="prenota" aria-labelledby="book-title" style="--c: var(--prugna)">
+    <div class="book-intro">
+      <div class="book-lamp" aria-hidden="true">
+        <div class="halo"></div>
+        <svg class="lamp-svg" viewBox="0 0 260 300"><use href="#lamp"/></svg>
+      </div>
+      <h2 id="book-title">
+        <span lang="it">Prenota un tavolo.</span>
+        <span lang="en">Book a table.</span>
+      </h2>
+      <p>
+        <span lang="it">Compila i campi: ti si apre WhatsApp con il messaggio già scritto. Il tavolo è confermato quando ti rispondiamo.</span>
+        <span lang="en">Fill in the fields and WhatsApp opens with the message already written. Your table is confirmed once we reply.</span>
+      </p>
+    </div>
+
+    <form class="book-form" id="book-form" novalidate>
+      <div class="field">
+        <label for="f-name"><span lang="it">Nome</span><span lang="en">Name</span></label>
+        <input id="f-name" name="name" type="text" autocomplete="name" required>
+        <span class="err" data-err="name" role="alert"></span>
+      </div>
+      <div class="field">
+        <label for="f-phone"><span lang="it">Telefono</span><span lang="en">Phone</span> <small><span lang="it">(facoltativo)</span><span lang="en">(optional)</span></small></label>
+        <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel">
+      </div>
+      <div class="field">
+        <label for="f-date"><span lang="it">Data</span><span lang="en">Date</span></label>
+        <input id="f-date" name="date" type="date" required>
+        <span class="err" data-err="date" role="alert"></span>
+      </div>
+      <div class="field">
+        <label for="f-time"><span lang="it">Orario</span><span lang="en">Time</span></label>
+        <select id="f-time" name="time" required>
+          <option value="" data-it="Scegli" data-en="Choose"></option>
+          <optgroup data-it="Pranzo" data-en="Lunch" label="Pranzo">
+            <option>12:30</option><option>13:00</option><option>13:30</option><option>14:00</option>
+          </optgroup>
+          <optgroup data-it="Cena" data-en="Dinner" label="Cena">
+            <option>19:30</option><option>20:00</option><option>20:30</option><option>21:00</option><option>21:30</option>
+          </optgroup>
+        </select>
+        <span class="err" data-err="time" role="alert"></span>
+      </div>
+      <div class="field field-guests">
+        <label id="guests-label"><span lang="it">Persone</span><span lang="en">Guests</span></label>
+        <div class="stepper" role="group" aria-labelledby="guests-label">
+          <button type="button" id="g-minus" aria-label="−"><span aria-hidden="true">−</span></button>
+          <output id="g-out" for="g-minus g-plus" aria-live="polite">2</output>
+          <button type="button" id="g-plus" aria-label="+"><span aria-hidden="true">+</span></button>
+        </div>
+      </div>
+      <div class="field field-wide">
+        <label for="f-notes"><span lang="it">Note, allergie, seggiolone…</span><span lang="en">Notes, allergies, high chair…</span></label>
+        <textarea id="f-notes" name="notes" rows="2"></textarea>
+      </div>
+
+      <div class="bubble-wrap">
+        <p class="bubble-label"><span lang="it">Il messaggio che invieremo</span><span lang="en">The message we'll send</span></p>
+        <div class="bubble" id="preview" aria-live="polite"></div>
+      </div>
+
+      <button class="btn btn-wa" type="submit">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+        <span lang="it">Invia su WhatsApp</span><span lang="en">Send on WhatsApp</span>
+      </button>
+      <p class="form-status" id="form-status" role="status"></p>
+    </form>
+  </section>
+
+  <!-- DOVE -->
+  <section class="dove scallop" id="dove" aria-labelledby="dove-title" style="--c: var(--blush)">
+    <h2 id="dove-title"><span lang="it">Dove siamo.</span><span lang="en">Where to find us.</span></h2>
+    <address>
+      <a class="addr" href="https://www.google.com/maps/search/?api=1&amp;query=Afrodita+Chef+Via+Rialto+1b+40124+Bologna" target="_blank" rel="noopener">Via Rialto, 1b<br>40124 Bologna</a>
+      <ul class="contacts">
+        <li><span class="k"><span lang="it">Telefono</span><span lang="en">Phone</span></span><a href="tel:+39051232423">+39 051 23 24 23</a></li>
+        <li><span class="k">Email</span><a href="mailto:sabina@afroditachef.it">sabina@afroditachef.it</a></li>
+      </ul>
+      <a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&amp;query=Afrodita+Chef+Via+Rialto+1b+40124+Bologna" target="_blank" rel="noopener"><span lang="it">Apri in Maps</span><span lang="en">Open in Maps</span><span aria-hidden="true"> ↗</span></a>
+    </address>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <img src="assets/logo.png" alt="Afrodita Chef · cibo per passione" width="227" height="117">
+  <p>© <span id="year">2026</span> Afrodita Chef · Via Rialto 1b, Bologna</p>
+</footer>
+
+<!-- WhatsApp glyph -->
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+  <symbol id="wa" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M12.04 2C6.5 2 2 6.46 2 11.96c0 1.9.54 3.7 1.5 5.24L2.1 22l4.96-1.37a10 10 0 0 0 4.98 1.33C17.58 21.96 22 17.5 22 12S17.58 2 12.04 2Zm0 18.2c-1.5 0-2.97-.4-4.25-1.16l-.3-.18-2.94.81.8-2.86-.2-.3a8.2 8.2 0 0 1-1.28-4.4c0-4.5 3.7-8.15 8.2-8.15 4.5 0 8.16 3.66 8.16 8.15 0 4.5-3.66 8.09-8.19 8.09Zm4.5-6.1c-.25-.12-1.45-.72-1.68-.8-.22-.08-.39-.12-.55.12-.16.25-.63.8-.77.96-.14.17-.28.19-.53.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.22-1.46-1.37-1.7-.14-.25-.02-.38.1-.5.12-.11.25-.28.37-.42.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.55-1.33-.76-1.82-.2-.48-.4-.41-.55-.42h-.47c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.03 0 1.2.87 2.35 1 2.52.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.1.16 1.52.1.46-.07 1.45-.6 1.65-1.17.2-.57.2-1.06.14-1.17-.06-.1-.22-.16-.47-.28Z"/>
+  </symbol>
+</svg>
+
+<script src="js/main.js"></script>
+</body>
+</html>
