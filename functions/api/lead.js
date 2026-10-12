@@ -21,11 +21,15 @@ export async function onRequestPost({ request, env }) {
 
   const lead = {
     email: clip(data.email, 254).toLowerCase(),
-    name: clip(data.name),
+    first_name: clip(data.first_name),
+    last_name: clip(data.last_name),
+    name: clip(data.name) || [clip(data.first_name), clip(data.last_name)].filter(Boolean).join(" "),
     company: clip(data.company),
     role: clip(data.role),
     phone: clip(data.phone, 40),
     team_size: clip(data.team_size, 10),
+    channel: clip(data.channel, 40),
+    qualified: data.qualified !== false,
     privacy_consent: data.privacy_consent === true,
     page: clip(data.page),
     referrer: clip(data.referrer, 500),
@@ -35,7 +39,7 @@ export async function onRequestPost({ request, env }) {
     if (data[k]) lead[k] = clip(data[k], 300);
   }
 
-  if (!emailRe.test(lead.email) || lead.name.length < 2 || !lead.company || !lead.role || !lead.privacy_consent) {
+  if (!emailRe.test(lead.email) || lead.name.length < 2 || !lead.company || !lead.role || lead.phone.replace(/\D/g, "").length < 8 || !lead.privacy_consent) {
     return json({ ok: false, error: "missing_fields" }, 422);
   }
 

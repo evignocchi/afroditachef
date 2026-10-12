@@ -5,16 +5,23 @@
   if (!form) return;
 
   var FALLBACK_URL = "https://www.aiclo.io/#contatti";
+  var QUESTIONS = 4;
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var steps = form.querySelectorAll("[data-step]");
-  var progress = form.querySelectorAll("[data-progress]");
+  var bars = form.querySelectorAll("[data-progress]");
+  var progressLabel = form.querySelector("[data-progress-label]");
   var booking = form.querySelector("[data-booking]");
   var success = form.querySelector("[data-success]");
   var errorBox = form.querySelector("[data-form-error]");
   var submitBtn = form.querySelector("[data-submit]");
   var bookingUrl = form.getAttribute("data-booking-url") || "";
-  var bookingReady = bookingUrl && bookingUrl.indexOf("PLACEHOLDER") === -1;
+  var bookingReady = /^https:\/\//.test(bookingUrl) && bookingUrl.indexOf("PLACEHOLDER") === -1;
+  var readList = function (attr) { try { return JSON.parse(form.getAttribute(attr) || "[]"); } catch (e) { return []; } };
+  var outRoles = readList("data-out-of-target-roles");
+  var outSizes = readList("data-out-of-target-sizes");
   var started = false;
+  var current = 1;
+  var sticky = document.querySelector("[data-sticky]");
 
   /* Attribution: keep UTM and click ids from the ad, even after in-page navigation */
   var params = new URLSearchParams(window.location.search);
@@ -34,7 +41,7 @@
     window.dataLayer.push(Object.assign({ event: event }, data || {}));
     if (event === "generate_lead") {
       if (typeof window.gtag === "function") window.gtag("event", "generate_lead", data || {});
-      if (typeof window.fbq === "function") window.fbq("track", "Lead");
+      if (typeof window.fbq === "function") window.fbq("track", "Lead", { qualified: data && data.qualified });
       if (window.lintrk) window.lintrk("track");
     }
     if (event === "demo_scheduled") {
@@ -47,47 +54,81 @@
     if (!started) { started = true; track("lead_form_start"); }
   });
 
-  /* Validation */
+  var picked = function (name) {
+    var el = form.querySelector('input[name="' + name + '"]:checked');
+    return el ? el.value : "";
+  };
+
+  /* Progress + navigation */
+  var setProgress = function (n) {
+    bars.forEach(function (b) {
+      var i = parseInt(b.getAttribute("data-progress"), 10);
+      b.classList.toggle("is-current", i === n);
+      b.classList.toggle("is-done", i < n);
+    });
+    progressLabel.textContent = n <= QUESTIONS ? "Domanda " + n + " di " + QUESTIONS : "Ultimo passo";
+  };
+
+  var goTo = function (n) {
+    current = n;
+    if (sticky) sticky.classList.remove("show");
+    steps.forEach(function (s) { s.hidden = s.getAttribute("data-step") !== String(n); });
+    setProgress(n);
+    var step = form.querySelector('[data-step="' + n + '"]');
+    var first = step.querySelector("input:checked") || step.querySelector("input:not([type=radio]), select") || step.querySelector("input");
+    if (first) first.focus({ preventScroll: true });
+    if (form.getBoundingClientRect().top < 0) form.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  };
+
+  /* Steps 1-3 are one tap each */
+  var fitCopy = {
+    "in presenza": "Ottimo: con l’app Aiclo registri anche gli appuntamenti dal vivo, in un tap.",
+    "in videocall": "Ottimo: Aiclo entra da solo nelle videocall dal tuo calendario.",
+    "al telefono": "Ottimo: le telefonate passano dal VoIP integrato e vengono analizzate in automatico."
+  };
+  var advanceTimer = null;
+  form.querySelectorAll("[data-auto] input").forEach(function (r) {
+    r.addEventListener("change", function () {
+      var n = parseInt(r.closest("[data-step]").getAttribute("data-step"), 10);
+      if (r.name === "channel") form.querySelector("[data-fit]").textContent = fitCopy[r.value] || "";
+      track("lead_form_step", { step: n + 1, field: r.name, value: r.value });
+      clearTimeout(advanceTimer);
+      advanceTimer = setTimeout(function () { goTo(n + 1); }, reduce ? 0 : 260);
+    });
+  });
+  form.querySelectorAll("[data-back]").forEach(function (b) {
+    b.addEventListener("click", function () { goTo(Math.max(1, current - 1)); });
+  });
+
+  /* Validation of the contact step */
   var setError = function (field, msg) {
     var wrap = field.closest(".field");
     var err = wrap ? wrap.querySelector(".field-error") : null;
     if (msg) {
       field.setAttribute("aria-invalid", "true");
-      if (err) { err.textContent = msg; err.hidden = false; if (err.id) field.setAttribute("aria-describedby", err.id); }
+      if (err) { err.textContent = msg; err.hidden = false; }
     } else {
       field.removeAttribute("aria-invalid");
       if (err) { err.hidden = true; err.textContent = ""; }
     }
     return !msg;
   };
-
   var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-  var teamErr = document.getElementById("f-team-err");
   var privErr = document.getElementById("f-privacy-err");
-  var chips = form.querySelector(".chips");
-
-  var validateTeam = function () {
-    if (form.querySelector('input[name="team_size"]:checked')) {
-      chips.removeAttribute("aria-invalid"); teamErr.hidden = true; return true;
-    }
-    chips.setAttribute("aria-invalid", "true");
-    teamErr.textContent = "Scegli la dimensione del team: ci serve per preparare la demo giusta.";
-    teamErr.hidden = false;
-    chips.querySelector("input").focus();
-    return false;
-  };
 
   var validateContacts = function () {
-    var ok = true, first = null;
+    var ok = true, first = null, f = form.elements;
     var mark = function (el, msg) { if (!setError(el, msg)) { ok = false; first = first || el; } };
-    var v = form.elements.email.value.trim();
-    mark(form.elements.email, !v ? "Inserisci la tua email aziendale." : !emailRe.test(v) ? "Controlla l’email: sembra incompleta (es. nome@azienda.it)." : "");
-    mark(form.elements.name, form.elements.name.value.trim().length < 2 ? "Inserisci nome e cognome." : "");
-    mark(form.elements.company, !form.elements.company.value.trim() ? "Inserisci il nome dell’azienda." : "");
-    mark(form.elements.role, !form.elements.role.value ? "Seleziona il tuo ruolo." : "");
-    if (!form.elements.privacy.checked) {
-      ok = false; first = first || form.elements.privacy;
-      privErr.textContent = "Per fissare la demo serve il consenso al contatto.";
+    mark(f.first_name, !f.first_name.value.trim() ? "Inserisci il tuo nome." : "");
+    mark(f.last_name, !f.last_name.value.trim() ? "Inserisci il tuo cognome." : "");
+    var v = f.email.value.trim();
+    mark(f.email, !v ? "Inserisci la tua email aziendale." : !emailRe.test(v) ? "Controlla l’email: sembra incompleta (es. nome@azienda.it)." : "");
+    var digits = f.phone.value.replace(/\D/g, "");
+    mark(f.phone, !digits ? "Inserisci un numero di telefono: serve allo specialista se la call salta." : digits.length < 8 ? "Il numero sembra troppo corto: controllalo." : "");
+    mark(f.company, !f.company.value.trim() ? "Inserisci il nome dell’azienda." : "");
+    if (!f.privacy.checked) {
+      ok = false; first = first || f.privacy;
+      privErr.textContent = "Per inviare la richiesta serve il consenso al trattamento dei dati.";
       privErr.hidden = false;
     } else { privErr.hidden = true; }
     if (first) first.focus();
@@ -100,35 +141,6 @@
     if (t.name === "privacy" && t.checked) privErr.hidden = true;
   });
 
-  var setProgress = function (n) {
-    progress.forEach(function (p) {
-      var i = parseInt(p.getAttribute("data-progress"), 10);
-      p.classList.toggle("is-current", i === n);
-      p.classList.toggle("is-done", i < n);
-    });
-  };
-
-  var goTo = function (n) {
-    steps.forEach(function (s) { s.hidden = s.getAttribute("data-step") !== String(n); });
-    setProgress(n);
-    var firstInput = form.querySelector('[data-step="' + n + '"] input:not([type=radio]), [data-step="' + n + '"] select');
-    if (firstInput) firstInput.focus({ preventScroll: true });
-  };
-
-  /* Step 1 is a single tap: picking a team size moves on */
-  var advanceTimer = null;
-  form.querySelectorAll('input[name="team_size"]').forEach(function (r) {
-    r.addEventListener("change", function () {
-      validateTeam();
-      clearTimeout(advanceTimer);
-      advanceTimer = setTimeout(function () {
-        track("lead_form_step", { step: 2, team_size: r.value });
-        goTo(2);
-      }, reduce ? 0 : 280);
-    });
-  });
-  form.querySelector("[data-back]").addEventListener("click", function () { goTo(1); });
-
   var showFormError = function () {
     errorBox.textContent = "Non siamo riusciti a inviare la richiesta. Riprova tra un momento oppure ";
     var a = document.createElement("a");
@@ -137,73 +149,74 @@
     errorBox.hidden = false;
   };
 
-  /* Step 3: booking calendar, prefilled with what the visitor already typed */
-  var showBooking = function (data) {
+  var finish = function (panel, data) {
     steps.forEach(function (s) { s.hidden = true; });
+    form.querySelectorAll("[data-success-email]").forEach(function (el) { el.textContent = data.email; });
+    panel.hidden = false;
+    panel.focus({ preventScroll: true });
+    panel.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "nearest" });
+  };
+
+  /* Qualified leads book straight away; the rest get a callback message */
+  var showBooking = function (data) {
     form.classList.add("is-booking");
-    setProgress(3);
-    form.querySelector("[data-success-email]").textContent = data.email;
+    setProgress(5);
     var cal = form.querySelector("[data-cal]");
     var link = form.querySelector("[data-cal-link]");
     if (bookingReady) {
       var u = new URL(bookingUrl);
-      u.searchParams.set("name", data.name);
+      u.searchParams.set("first_name", data.first_name);
+      u.searchParams.set("last_name", data.last_name);
+      u.searchParams.set("name", data.first_name + " " + data.last_name);
       u.searchParams.set("email", data.email);
+      u.searchParams.set("phone", data.phone);
       Object.keys(attribution).forEach(function (k) { if (k.indexOf("utm_") === 0) u.searchParams.set(k, attribution[k]); });
-      var embed = new URL(u.toString());
-      embed.searchParams.set("embed_domain", window.location.hostname);
-      embed.searchParams.set("embed_type", "Inline");
-      embed.searchParams.set("hide_gdpr_banner", "1");
       var frame = document.createElement("iframe");
-      frame.src = embed.toString();
+      frame.src = u.toString();
       frame.title = "Calendario per prenotare la demo";
-      frame.loading = "lazy";
       cal.appendChild(frame);
       link.href = u.toString();
     } else {
       cal.classList.add("is-placeholder");
-      cal.innerHTML = "<div><b>Qui apparirà il calendario per prenotare</b>Calendly, HubSpot Meetings o Google Calendar, già compilato con nome ed email.</div>";
-      var tag = document.createElement("span");
-      tag.className = "ph-tag"; tag.textContent = "Segnaposto";
-      cal.appendChild(tag);
+      cal.innerHTML = "<div><b>Qui apparirà il calendario per prenotare</b>Già compilato con nome, email e telefono.</div>";
       link.hidden = true;
     }
-    booking.hidden = false;
-    booking.focus({ preventScroll: true });
-    booking.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "nearest" });
+    finish(booking, data);
   };
 
-  /* Calendly reports a confirmed booking via postMessage */
+  /* Booking confirmations reported by the embedded calendar */
   window.addEventListener("message", function (e) {
-    if (!/calendly\.com$/.test(new URL(e.origin, location.href).hostname)) return;
-    if (e.data && e.data.event === "calendly.event_scheduled") {
+    var d = e.data;
+    var text = typeof d === "string" ? d : (d && (d.event || d.type || d.action)) || "";
+    if (/calendly\.event_scheduled|booking[-_ ]?(complete|success|confirmed)|appointment[-_ ]?(booked|created)/i.test(String(text))) {
       track("demo_scheduled");
-      booking.hidden = true;
-      form.classList.add("is-sent");
-      success.hidden = false;
-      success.focus();
     }
   });
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    if (!steps[0].hidden) { validateTeam(); return; }
+    if (current !== QUESTIONS) return;
     if (!validateContacts()) return;
     errorBox.hidden = true;
 
+    var f = form.elements;
     var data = {
-      email: form.elements.email.value.trim(),
-      team_size: form.querySelector('input[name="team_size"]:checked').value,
-      name: form.elements.name.value.trim(),
-      company: form.elements.company.value.trim(),
-      role: form.elements.role.value,
-      phone: form.elements.phone.value.trim(),
+      role: picked("role"),
+      team_size: picked("team_size"),
+      channel: picked("channel"),
+      first_name: f.first_name.value.trim(),
+      last_name: f.last_name.value.trim(),
+      email: f.email.value.trim(),
+      phone: f.phone.value.trim(),
+      company: f.company.value.trim(),
       privacy_consent: true,
-      company_website: form.elements.company_website.value,
+      company_website: f.company_website.value,
       page: window.location.pathname,
       referrer: document.referrer || "",
       submitted_at: new Date().toISOString()
     };
+    data.name = data.first_name + " " + data.last_name;
+    data.qualified = outRoles.indexOf(data.role) === -1 && outSizes.indexOf(data.team_size) === -1;
     Object.keys(attribution).forEach(function (k) { data[k] = attribution[k]; });
 
     submitBtn.setAttribute("aria-busy", "true");
@@ -217,10 +230,11 @@
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
     }).then(function (res) {
-      /* 503 = CRM not connected yet: the calendar still captures the booking */
+      /* 503 = CRM not connected yet: the booking calendar still captures the lead */
       if (!res.ok && res.status !== 503) throw new Error("HTTP " + res.status);
-      track("generate_lead", { team_size: data.team_size, role: data.role });
-      showBooking(data);
+      track("generate_lead", { qualified: data.qualified, role: data.role, team_size: data.team_size, channel: data.channel });
+      if (data.qualified) showBooking(data);
+      else { form.classList.add("is-sent"); setProgress(5); finish(success, data); }
     }).catch(function () {
       showFormError();
       track("lead_form_error");
@@ -238,18 +252,17 @@
       var host = a.closest("section, header, .lp-sticky");
       track("cta_click", { location: host ? host.className.split(" ")[0] : "" });
       form.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
-      var target = form.querySelector(".lp-step:not([hidden]) input, .lp-step:not([hidden]) select");
+      var target = form.querySelector(".lp-step:not([hidden]) input");
       if (target) setTimeout(function () { target.focus({ preventScroll: true }); }, 450);
     });
   });
 
   /* Mobile sticky CTA: shown once the form is out of view, hidden near the closing CTA */
-  var sticky = document.querySelector("[data-sticky]");
   var closing = document.querySelector("[data-closing]");
   if (sticky && "IntersectionObserver" in window) {
     var formVisible = true, closingVisible = false;
     var update = function () {
-      var show = !formVisible && !closingVisible && !form.classList.contains("is-sent") && !form.classList.contains("is-booking");
+      var show = !formVisible && !closingVisible && current === 1 && !form.classList.contains("is-sent") && !form.classList.contains("is-booking");
       sticky.classList.toggle("show", show);
       sticky.setAttribute("aria-hidden", String(!show));
       sticky.querySelector("a").tabIndex = show ? 0 : -1;

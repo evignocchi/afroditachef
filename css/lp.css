@@ -33,11 +33,10 @@
 .lp-form-head h2 { font-size: 1.45rem; letter-spacing: -.03em; line-height: 1.2; }
 .lp-form-head p { color: var(--ink-2); font-size: .95rem; margin-top: 8px; }
 
-.lp-progress { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 22px 0 20px; counter-reset: none; }
-.lp-progress li { display: flex; align-items: center; gap: 8px; font-size: .82rem; color: var(--muted); padding-top: 10px; border-top: 2px solid var(--line-2); transition: color .3s, border-color .3s; }
-.lp-progress span { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; font-size: .72rem; font-weight: 700; background: var(--line); color: var(--ink-2); font-family: var(--f-mono); }
-.lp-progress .is-current, .lp-progress .is-done { color: var(--ink); border-top-color: var(--amber); }
-.lp-progress .is-current span, .lp-progress .is-done span { background: var(--amber); color: var(--amber-ink); }
+.lp-progress { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin: 22px 0 8px; }
+.lp-progress i { height: 4px; border-radius: 4px; background: var(--line-2); transition: background-color .4s var(--ease-out); }
+.lp-progress i.is-current, .lp-progress i.is-done { background: var(--amber); }
+.lp-progress-label { font-family: var(--f-mono); font-size: .78rem; color: var(--muted); margin-bottom: 14px; }
 
 .lp-step { border: 0; margin: 0; padding: 0; min-width: 0; display: grid; gap: 18px; }
 .field { display: grid; gap: 7px; min-width: 0; }
@@ -147,8 +146,9 @@
   .lp-promises li:nth-child(n+2) { display: none; }
   .lp-cal { height: 620px; }
   .lp-promises { margin-top: 24px; }
-  .field-row { grid-template-columns: 1fr; }
   .chips { grid-template-columns: repeat(2, 1fr); }
+  .field-row { grid-template-columns: 1fr; }
+  .field-row-keep { grid-template-columns: 1fr 1fr; gap: 10px; }
   .lp-roles .btn { width: 100%; justify-content: center; }
 }
 @media (max-width: 420px) {
@@ -185,7 +185,17 @@
 .lp-quote-lead blockquote::first-letter { color: var(--amber); }
 
 /* Form steps */
-.lp-q { font-size: 1rem !important; }
+.lp-q { font-family: var(--f-display); font-size: 1.15rem; font-weight: 600; letter-spacing: -.02em; color: var(--ink); padding: 0; margin-bottom: 2px; }
+.chips-2 { grid-template-columns: repeat(2, 1fr) !important; }
+.chips-3 { grid-template-columns: repeat(3, 1fr) !important; }
+.chip-wide { grid-column: 1 / -1; }
+.chip span { padding: 10px 12px; text-align: center; line-height: 1.25; gap: 8px; }
+.chips-3 .chip span { display: flex; flex-direction: column; justify-content: center; min-height: 84px; }
+.chips-3 svg { width: 24px; height: 24px; color: var(--amber); }
+.lp-back-link { justify-self: start; background: none; border: 0; padding: 4px 0; color: var(--muted); font-size: .88rem; cursor: pointer; text-decoration: underline; text-underline-offset: .2em; }
+.lp-back-link:hover { color: var(--ink); }
+.lp-fit { color: var(--amber-hi); font-size: .9rem; margin-top: -6px; }
+.lp-fit:empty { display: none; }
 .lp-step-hint { color: var(--muted); font-size: .85rem; margin-top: -4px; }
 .lp-booking h3 { font-size: 1.25rem; letter-spacing: -.025em; }
 .lp-booking-sub { color: var(--ink-2); font-size: .92rem; margin-top: -8px; }

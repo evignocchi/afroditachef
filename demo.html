@@ -77,35 +77,64 @@
         </div>
 
         <div class="lp-form-col">
-          <form class="lp-form" id="demo-form" novalidate data-lead-form data-endpoint="/api/lead" data-booking-url="https://calendly.com/PLACEHOLDER-aiclo/demo-30-minuti" aria-labelledby="form-title">
+          <form class="lp-form" id="demo-form" novalidate data-lead-form data-endpoint="/api/lead" data-booking-url="https://link.drewcompany.it/widget/booking/oLZfpZWkchcv6qRvhNVk" data-out-of-target-roles="[]" data-out-of-target-sizes="[]" aria-labelledby="form-title">
             <div class="lp-form-head">
               <h2 id="form-title">Guarda Aiclo sulle tue trattative</h2>
-              <p>Demo dal vivo di 30 minuti con uno specialista, sul tuo caso. Gratuita e senza impegno.</p>
+              <p>4 domande, meno di un minuto. Poi scegli tu giorno e ora per una demo dal vivo di 30 minuti, gratuita e senza impegno.</p>
             </div>
 
-            <ol class="lp-progress" aria-label="Avanzamento">
-              <li class="is-current" data-progress="1"><span>1</span>Il team</li>
-              <li data-progress="2"><span>2</span>I tuoi dati</li>
-              <li data-progress="3"><span>3</span>L’orario</li>
-            </ol>
+            <div class="lp-progress" aria-hidden="true"><i data-progress="1" class="is-current"></i><i data-progress="2"></i><i data-progress="3"></i><i data-progress="4"></i><i data-progress="5"></i></div>
+            <p class="lp-progress-label"><span data-progress-label>Domanda 1 di 4</span></p>
 
             <fieldset class="lp-step" data-step="1">
-              <legend class="sr">Passo 1 di 3: il tuo team</legend>
-              <div class="field">
-                <span class="label lp-q" id="f-team-label">Quanti venditori ci sono nel tuo team?</span>
-                <div class="chips" role="radiogroup" aria-labelledby="f-team-label">
-                  <label class="chip"><input type="radio" name="team_size" value="1-5" required><span>1–5</span></label>
-                  <label class="chip"><input type="radio" name="team_size" value="6-15"><span>6–15</span></label>
-                  <label class="chip"><input type="radio" name="team_size" value="16-50"><span>16–50</span></label>
-                  <label class="chip"><input type="radio" name="team_size" value="50+"><span>50+</span></label>
-                </div>
-                <p class="field-error" id="f-team-err" hidden></p>
+              <legend class="lp-q">Qual è il tuo ruolo?</legend>
+              <div class="chips chips-2" data-auto>
+                <label class="chip"><input type="radio" name="role" value="Imprenditore: Ho un'azienda"><span>Imprenditore / Titolare</span></label>
+                <label class="chip"><input type="radio" name="role" value="Direttore Commerciale: Gestisco un intero Reparto Vendite"><span>Direttore commerciale</span></label>
+                <label class="chip"><input type="radio" name="role" value="Area Manager/Team Leader"><span>Area manager / Team leader</span></label>
+                <label class="chip"><input type="radio" name="role" value="Venditore/Agente"><span>Venditore / Agente</span></label>
+                <label class="chip"><input type="radio" name="role" value="HR Manager"><span>HR manager</span></label>
+                <label class="chip"><input type="radio" name="role" value="CTO"><span>CTO</span></label>
+                <label class="chip chip-wide"><input type="radio" name="role" value="Consulente Esterno/Agenzia"><span>Consulente esterno / Agenzia</span></label>
               </div>
-              <p class="lp-step-hint">Un tap e prepariamo la demo sulla dimensione del tuo team.</p>
             </fieldset>
 
             <fieldset class="lp-step" data-step="2" hidden>
-              <legend class="sr">Passo 2 di 3: i tuoi dati</legend>
+              <legend class="lp-q">Da quanti venditori è composto il tuo team?</legend>
+              <div class="chips" data-auto>
+                <label class="chip"><input type="radio" name="team_size" value="1-5"><span>1–5</span></label>
+                <label class="chip"><input type="radio" name="team_size" value="6-15"><span>6–15</span></label>
+                <label class="chip"><input type="radio" name="team_size" value="16-50"><span>16–50</span></label>
+                <label class="chip"><input type="radio" name="team_size" value="50+"><span>50+</span></label>
+              </div>
+              <button class="lp-back-link" type="button" data-back>Indietro</button>
+            </fieldset>
+
+            <fieldset class="lp-step" data-step="3" hidden>
+              <legend class="lp-q">Come vende principalmente il tuo team?</legend>
+              <div class="chips chips-3" data-auto>
+                <label class="chip"><input type="radio" name="channel" value="in presenza"><span><svg aria-hidden="true"><use href="#i-people"/></svg>In presenza</span></label>
+                <label class="chip"><input type="radio" name="channel" value="in videocall"><span><svg aria-hidden="true"><use href="#i-video"/></svg>In videocall</span></label>
+                <label class="chip"><input type="radio" name="channel" value="al telefono"><span><svg aria-hidden="true"><use href="#i-phone"/></svg>Al telefono</span></label>
+              </div>
+              <button class="lp-back-link" type="button" data-back>Indietro</button>
+            </fieldset>
+
+            <fieldset class="lp-step" data-step="4" hidden>
+              <legend class="lp-q">Dove ti mandiamo l’invito alla demo?</legend>
+              <p class="lp-fit" data-fit></p>
+              <div class="field-row field-row-keep">
+                <div class="field">
+                  <label for="f-first">Nome</label>
+                  <input id="f-first" name="first_name" type="text" autocomplete="given-name" required>
+                  <p class="field-error" hidden></p>
+                </div>
+                <div class="field">
+                  <label for="f-last">Cognome</label>
+                  <input id="f-last" name="last_name" type="text" autocomplete="family-name" required>
+                  <p class="field-error" hidden></p>
+                </div>
+              </div>
               <div class="field">
                 <label for="f-email">Email aziendale</label>
                 <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="nome@azienda.it" required>
@@ -113,8 +142,8 @@
               </div>
               <div class="field-row">
                 <div class="field">
-                  <label for="f-name">Nome e cognome</label>
-                  <input id="f-name" name="name" type="text" autocomplete="name" required>
+                  <label for="f-phone">Telefono</label>
+                  <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+39 333 1234567" required>
                   <p class="field-error" hidden></p>
                 </div>
                 <div class="field">
@@ -123,47 +152,29 @@
                   <p class="field-error" hidden></p>
                 </div>
               </div>
-              <div class="field-row">
-                <div class="field">
-                  <label for="f-role">Il tuo ruolo</label>
-                  <select id="f-role" name="role" required>
-                    <option value="" selected disabled>Seleziona</option>
-                    <option>Titolare / CEO</option>
-                    <option>Direttore commerciale</option>
-                    <option>Sales manager / Area manager</option>
-                    <option>Venditore / Agente</option>
-                    <option>Altro</option>
-                  </select>
-                  <p class="field-error" hidden></p>
-                </div>
-                <div class="field">
-                  <label for="f-phone">Telefono <span class="opt">facoltativo</span></label>
-                  <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+39">
-                </div>
-              </div>
               <label class="consent" for="f-privacy">
                 <input id="f-privacy" name="privacy" type="checkbox" required>
-                <span>Ho letto l’<a href="https://www.aiclo.io/privacy-policy" target="_blank" rel="noopener">informativa privacy</a> e acconsento a essere contattato per la demo.</span>
+                <span>Acconsento al trattamento dei miei dati personali ai sensi del Regolamento (UE) 2016/679 (GDPR) per le finalità indicate nella <a href="https://www.aiclo.io/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>.</span>
               </label>
               <p class="field-error" id="f-privacy-err" hidden></p>
               <div class="lp-step-actions">
                 <button class="btn btn-ghost btn-back" type="button" data-back>Indietro</button>
-                <button class="btn btn-primary btn-block" type="submit" data-submit><span>Scegli giorno e ora</span> <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+                <button class="btn btn-primary btn-block" type="submit" data-submit><span>Richiedi la demo gratuita</span> <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
               </div>
               <p class="form-error" role="alert" data-form-error hidden></p>
             </fieldset>
 
             <div class="lp-step lp-booking" data-booking hidden tabindex="-1">
               <h3>Ultimo passo: scegli giorno e ora.</h3>
-              <p class="lp-booking-sub">Ti mandiamo l’invito con il link alla call a <strong data-success-email></strong>.</p>
+              <p class="lp-booking-sub">30 minuti con uno specialista. L’invito arriva a <strong data-success-email></strong>.</p>
               <div class="lp-cal" data-cal></div>
               <a class="link-arrow lp-cal-open" data-cal-link href="#" target="_blank" rel="noopener">Apri il calendario in una nuova scheda <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
             </div>
 
             <div class="lp-success" data-success hidden tabindex="-1">
               <span class="lp-success-icon"><svg aria-hidden="true"><use href="#i-check"/></svg></span>
-              <h3>Demo prenotata.</h3>
-              <p>Trovi l’invito nella tua casella email. A presto!</p>
+              <h3>Grazie, richiesta ricevuta.</h3>
+              <p>Il nostro team ti ricontatterà a breve all’indirizzo <strong data-success-email></strong>.</p>
             </div>
 
             <input type="text" name="company_website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
