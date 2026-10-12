@@ -13,13 +13,15 @@
 
   var menuBtn = document.querySelector("[data-menu]");
   var nav = document.getElementById("nav");
-  menuBtn.addEventListener("click", function () {
-    var open = nav.classList.toggle("open");
-    menuBtn.setAttribute("aria-expanded", String(open));
-  });
-  nav.addEventListener("click", function (e) {
-    if (e.target.closest("a")) { nav.classList.remove("open"); menuBtn.setAttribute("aria-expanded", "false"); }
-  });
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", function () {
+      var open = nav.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", String(open));
+    });
+    nav.addEventListener("click", function (e) {
+      if (e.target.closest("a")) { nav.classList.remove("open"); menuBtn.setAttribute("aria-expanded", "false"); }
+    });
+  }
 
   /* Waveforms: deterministic pseudo-random bars that read like speech */
   var seed = 7;
@@ -76,6 +78,7 @@
 
   /* Hero session: live timer, playhead over the waveform, rotating transcript */
   var session = document.querySelector(".session");
+  if (session) (function () {
   var heroWave = session.querySelector("[data-wave]");
   var bars = heroWave.children;
   var timer = session.querySelector("[data-timer]");
@@ -117,8 +120,12 @@
     }, 4200);
   }
 
+  })();
+
   /* Coverage grid: 5 heard vs 100 analysed */
   var cov = document.querySelector("[data-coverage]");
+  var covTimer = null, setCoverage = function () {};
+  if (cov) (function () {
   var grid = cov.querySelector("[data-grid]");
   var heard = { 7: 1, 23: 1, 46: 1, 68: 1, 91: 1 };
   for (var g = 0; g < 100; g++) {
@@ -130,8 +137,7 @@
   var covNum = cov.querySelector("[data-cov-num]");
   var covLabel = cov.querySelector("[data-cov-label]");
   var covBtns = cov.querySelectorAll("[data-set]");
-  var covTimer = null;
-  var setCoverage = function (state) {
+  setCoverage = function (state) {
     cov.setAttribute("data-state", state);
     covBtns.forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-set") === state)); });
     if (state === "aiclo") {
@@ -146,6 +152,7 @@
   covBtns.forEach(function (b) {
     b.addEventListener("click", function () { clearTimeout(covTimer); setCoverage(b.getAttribute("data-set")); });
   });
+  })();
   function coverageAuto() {
     if (reduce) return;
     covTimer = setTimeout(function () { setCoverage("aiclo"); }, 1800);

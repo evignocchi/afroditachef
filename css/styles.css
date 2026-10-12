@@ -79,6 +79,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 dl, dd, figure, fieldset, blockquote { margin: 0; }
 svg { width: 1em; height: 1em; flex: none; }
 .sprite { position: absolute; }
+[hidden] { display: none !important; }
 
 ::selection { background: var(--amber); color: var(--amber-ink); }
 :focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 6px; }
