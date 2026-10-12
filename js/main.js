@@ -1,179 +1,193 @@
-/* Afrodita Chef — language switch, booking → WhatsApp, small motion. */
 (function () {
   "use strict";
 
-  // ---- Config: replace with the restaurant's real WhatsApp number (country code, digits only).
-  var WHATSAPP_NUMBER = "390000000000";
-  var MAX_GUESTS = 12;
-
-  document.documentElement.classList.add("js");
-
   var root = document.documentElement;
-  var $ = function (s, c) { return (c || document).querySelector(s); };
-  var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
-
-  function store(key, val) {
-    try { if (val === undefined) return localStorage.getItem(key); localStorage.setItem(key, val); } catch (e) { return null; }
-  }
-
-  // ---------------------------------------------------------------- language
-  var TITLES = {
-    it: "Afrodita Chef · Ristorante a Bologna",
-    en: "Afrodita Chef · Restaurant in Bologna"
-  };
-  var DESCS = {
-    it: "Afrodita Chef, ristorante in Via Rialto 1b a Bologna. Cibo per passione. Prenota il tuo tavolo su WhatsApp.",
-    en: "Afrodita Chef, a restaurant at Via Rialto 1b in Bologna. Food made with passion. Book your table on WhatsApp."
-  };
-  var lang = "it";
-
-  function initialLang() {
-    var q = /[?&]lang=(it|en)\b/.exec(location.search);
-    if (q) return q[1];
-    var saved = store("lang");
-    if (saved === "it" || saved === "en") return saved;
-    return /^it/i.test(navigator.language || "it") ? "it" : "en";
-  }
-
-  function setLang(next, persist) {
-    lang = next;
-    root.lang = next;
-    document.title = TITLES[next];
-    var meta = $('meta[name="description"]'); if (meta) meta.content = DESCS[next];
-    $$("[data-set-lang]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.setLang === next)); });
-    $$("[data-it]").forEach(function (el) {
-      var txt = el.getAttribute("data-" + next);
-      if (el.tagName === "OPTION") el.textContent = txt; else el.setAttribute("label", txt);
-    });
-    if (persist) store("lang", next);
-    renderPreview();
-  }
-
-  $$("[data-set-lang]").forEach(function (b) {
-    b.addEventListener("click", function () { setLang(b.dataset.setLang, true); });
-  });
-
-  // ---------------------------------------------------------------- mobile nav
-  var burger = $("#burger"), nav = $("#nav");
-  function closeNav() { nav.classList.remove("open"); burger.setAttribute("aria-expanded", "false"); }
-  burger.addEventListener("click", function () {
-    var open = nav.classList.toggle("open");
-    burger.setAttribute("aria-expanded", String(open));
-  });
-  $$("a", nav).forEach(function (a) { a.addEventListener("click", closeNav); });
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeNav(); });
-
-  // ---------------------------------------------------------------- reveal on scroll
+  root.classList.add("js");
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if ("IntersectionObserver" in window && !reduce) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
-    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
-    $$(".reveal").forEach(function (el, i) { el.style.transitionDelay = (i % 3) * 90 + "ms"; io.observe(el); });
-  } else {
-    $$(".reveal").forEach(function (el) { el.classList.add("in"); });
-  }
 
-  // ---------------------------------------------------------------- booking form
-  var form = $("#book-form");
-  var fName = $("#f-name"), fPhone = $("#f-phone"), fDate = $("#f-date"), fTime = $("#f-time"), fNotes = $("#f-notes");
-  var gOut = $("#g-out"), gMinus = $("#g-minus"), gPlus = $("#g-plus");
-  var preview = $("#preview"), status = $("#form-status"), lampBox = $(".book-lamp");
-  var guests = 2;
+  /* Header state + mobile menu */
+  var header = document.querySelector("[data-header]");
+  var onScroll = function () { header.classList.toggle("is-scrolled", window.scrollY > 8); };
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
 
-  function pad(n) { return (n < 10 ? "0" : "") + n; }
-  var now = new Date();
-  var todayStr = now.getFullYear() + "-" + pad(now.getMonth() + 1) + "-" + pad(now.getDate());
-  fDate.min = todayStr;
+  var menuBtn = document.querySelector("[data-menu]");
+  var nav = document.getElementById("nav");
+  menuBtn.addEventListener("click", function () {
+    var open = nav.classList.toggle("open");
+    menuBtn.setAttribute("aria-expanded", String(open));
+  });
+  nav.addEventListener("click", function (e) {
+    if (e.target.closest("a")) { nav.classList.remove("open"); menuBtn.setAttribute("aria-expanded", "false"); }
+  });
 
-  function setGuests(n) {
-    guests = Math.max(1, Math.min(MAX_GUESTS, n));
-    gOut.textContent = guests;
-    gMinus.disabled = guests <= 1;
-    gPlus.disabled = guests >= MAX_GUESTS;
-    renderPreview();
-  }
-  gMinus.addEventListener("click", function () { setGuests(guests - 1); });
-  gPlus.addEventListener("click", function () { setGuests(guests + 1); });
+  /* Waveforms: deterministic pseudo-random bars that read like speech */
+  var seed = 7;
+  var rand = function () { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+  document.querySelectorAll("[data-wave]").forEach(function (el) {
+    var n = parseInt(el.getAttribute("data-wave"), 10);
+    var frag = document.createDocumentFragment();
+    for (var i = 0; i < n; i++) {
+      var phrase = Math.sin(i / 5.5) * 0.5 + 0.5;
+      var h = 0.14 + phrase * 0.55 * rand() + rand() * 0.3;
+      var b = document.createElement("i");
+      b.style.setProperty("--h", Math.min(1, h).toFixed(3));
+      b.style.setProperty("--d", (rand() * 1.1).toFixed(2));
+      frag.appendChild(b);
+    }
+    el.appendChild(frag);
+  });
 
-  function fmtDate(v) {
-    if (!v) return "";
-    var p = v.split("-");
-    var d = new Date(+p[0], +p[1] - 1, +p[2]);
-    return d.toLocaleDateString(lang === "it" ? "it-IT" : "en-GB", { weekday: "long", day: "numeric", month: "long" });
-  }
-
-  function buildMessage() {
-    var it = lang === "it";
-    var L = it
-      ? { hi: "Ciao Afrodita Chef! Vorrei prenotare un tavolo.", n: "Nome", d: "Data", t: "Orario", g: "Persone", p: "Telefono", no: "Note", ph: "…" }
-      : { hi: "Hi Afrodita Chef! I'd like to book a table.", n: "Name", d: "Date", t: "Time", g: "Guests", p: "Phone", no: "Notes", ph: "…" };
-    var lines = [L.hi, ""];
-    lines.push(L.n + ": " + (fName.value.trim() || L.ph));
-    lines.push(L.d + ": " + (fmtDate(fDate.value) || L.ph));
-    lines.push(L.t + ": " + (fTime.value || L.ph));
-    lines.push(L.g + ": " + guests);
-    if (fPhone.value.trim()) lines.push(L.p + ": " + fPhone.value.trim());
-    if (fNotes.value.trim()) lines.push(L.no + ": " + fNotes.value.trim());
-    lines.push("", it ? "Grazie!" : "Thank you!");
-    return lines.join("\n");
-  }
-
-  function renderPreview() { if (preview) preview.textContent = buildMessage(); updateLamp(); }
-
-  // The lamp over the form lights up as the booking is filled in.
-  function updateLamp() {
-    var done = 0;
-    if (fName.value.trim()) done++;
-    if (fDate.value) done++;
-    if (fTime.value) done++;
-    var amt = 0.1 + (done / 3) * 0.9;
-    if (lampBox) lampBox.style.setProperty("--glow-amt", amt.toFixed(2));
-  }
-
-  var MSG = {
-    it: { name: "Scrivi il tuo nome.", date: "Scegli una data.", datePast: "La data è già passata.", time: "Scegli un orario.", ok: "Si apre WhatsApp…", fallback: "Non si è aperto?", open: "Tocca qui" },
-    en: { name: "Please enter your name.", date: "Pick a date.", datePast: "That date has passed.", time: "Pick a time.", ok: "Opening WhatsApp…", fallback: "Didn't open?", open: "Tap here" }
+  /* In-view: panels fill their bars, steps draw their rule, numbers count */
+  var countUp = function (el) {
+    var to = parseFloat(el.getAttribute("data-count"));
+    var dec = parseInt(el.getAttribute("data-decimals") || "0", 10);
+    if (reduce) { el.textContent = to.toFixed(dec); return; }
+    var t0 = null, dur = 1400;
+    var step = function (t) {
+      if (!t0) t0 = t;
+      var p = Math.min(1, (t - t0) / dur);
+      var e = 1 - Math.pow(2, -10 * p);
+      el.textContent = (to * (p === 1 ? 1 : e)).toFixed(dec);
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
   };
 
-  function setErr(key, el, msg) {
-    var span = $('[data-err="' + key + '"]');
-    if (span) span.textContent = msg || "";
-    if (msg) el.setAttribute("aria-invalid", "true"); else el.removeAttribute("aria-invalid");
+  var watched = document.querySelectorAll(".panel, .steps, .results, [data-coverage]");
+  document.querySelectorAll(".panel:not(.session)").forEach(function (p) { p.classList.add("reveal"); });
+
+  var onEnter = function (el) {
+    el.classList.add("in");
+    el.querySelectorAll("[data-count]").forEach(countUp);
+    if (el.hasAttribute("data-coverage")) coverageAuto(el);
+  };
+
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { onEnter(en.target); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.25 });
+    watched.forEach(function (el) { io.observe(el); });
+  } else {
+    watched.forEach(onEnter);
   }
 
-  function validate() {
-    var m = MSG[lang], first = null;
-    var okName = fName.value.trim().length > 0;
-    setErr("name", fName, okName ? "" : m.name); if (!okName) first = first || fName;
-    var okDate = !!fDate.value && fDate.value >= todayStr;
-    setErr("date", fDate, !fDate.value ? m.date : (okDate ? "" : m.datePast)); if (!okDate) first = first || fDate;
-    var okTime = !!fTime.value;
-    setErr("time", fTime, okTime ? "" : m.time); if (!okTime) first = first || fTime;
-    if (first) first.focus();
-    return !first;
+  /* Hero session: live timer, playhead over the waveform, rotating transcript */
+  var session = document.querySelector(".session");
+  var heroWave = session.querySelector("[data-wave]");
+  var bars = heroWave.children;
+  var timer = session.querySelector("[data-timer]");
+  var line = session.querySelector("[data-transcript]");
+  var who = session.querySelector(".transcript .who");
+  var lines = [
+    ["Cliente", "“Il prezzo è più alto di quanto avevamo messo a budget.”"],
+    ["Marco", "“Capisco. Il vero problema è la disponibilità economica o il ritorno sull’investimento?”"],
+    ["Cliente", "“Più il ritorno. Dovrei vedere i numeri con il mio socio.”"],
+    ["Marco", "“Allora prepariamo una proposta con il ROI a due mesi da mostrargli.”"]
+  ];
+  var secs = 12 * 60 + 4, head = 0, li = 0;
+
+  for (var k = 0; k < bars.length * 0.4; k++) bars[k].classList.add("on");
+  head = Math.floor(bars.length * 0.4);
+
+  if (!reduce) {
+    root.classList.add("is-playing");
+    setInterval(function () {
+      secs++;
+      var m = Math.floor(secs / 60), s = secs % 60;
+      timer.textContent = (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
+    }, 1000);
+    setInterval(function () {
+      if (head >= bars.length) {
+        for (var j = 0; j < bars.length; j++) bars[j].classList.remove("on");
+        head = 0;
+      }
+      bars[head++].classList.add("on");
+    }, 140);
+    setInterval(function () {
+      li = (li + 1) % lines.length;
+      line.style.opacity = "0";
+      setTimeout(function () {
+        who.textContent = lines[li][0];
+        line.textContent = lines[li][1];
+        line.style.opacity = "1";
+      }, 350);
+    }, 4200);
   }
 
-  [fName, fPhone, fDate, fTime, fNotes].forEach(function (el) {
-    el.addEventListener("input", function () { el.removeAttribute("aria-invalid"); var s = $('[data-err="' + (el.name) + '"]'); if (s) s.textContent = ""; renderPreview(); });
-    el.addEventListener("change", renderPreview);
+  /* Coverage grid: 5 heard vs 100 analysed */
+  var cov = document.querySelector("[data-coverage]");
+  var grid = cov.querySelector("[data-grid]");
+  var heard = { 7: 1, 23: 1, 46: 1, 68: 1, 91: 1 };
+  for (var g = 0; g < 100; g++) {
+    var c = document.createElement("i");
+    c.style.setProperty("--i", ((g % 10) + Math.floor(g / 10)) * 4);
+    if (heard[g]) c.className = "heard";
+    grid.appendChild(c);
+  }
+  var covNum = cov.querySelector("[data-cov-num]");
+  var covLabel = cov.querySelector("[data-cov-label]");
+  var covBtns = cov.querySelectorAll("[data-set]");
+  var covTimer = null;
+  var setCoverage = function (state) {
+    cov.setAttribute("data-state", state);
+    covBtns.forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-set") === state)); });
+    if (state === "aiclo") {
+      covNum.setAttribute("data-count", "100");
+      countUp(covNum);
+      covLabel.textContent = "delle trattative analizzate da Aiclo";
+    } else {
+      covNum.textContent = "5";
+      covLabel.textContent = "delle trattative ascoltate da un manager";
+    }
+  };
+  covBtns.forEach(function (b) {
+    b.addEventListener("click", function () { clearTimeout(covTimer); setCoverage(b.getAttribute("data-set")); });
   });
+  function coverageAuto() {
+    if (reduce) return;
+    covTimer = setTimeout(function () { setCoverage("aiclo"); }, 1800);
+  }
 
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    if (!validate()) return;
-    var url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(buildMessage());
-    var m = MSG[lang];
-    status.innerHTML = "";
-    status.appendChild(document.createTextNode(m.ok + " " + m.fallback + " "));
-    var a = document.createElement("a"); a.href = url; a.target = "_blank"; a.rel = "noopener"; a.textContent = m.open;
-    status.appendChild(a);
-    var w = window.open(url, "_blank", "noopener");
-    if (!w) window.location.href = url;
+  /* Copy actions */
+  var toast = document.querySelector("[data-toast]");
+  var flash = function (btn, msg) {
+    var label = btn.querySelector("span");
+    var old = label.textContent;
+    label.textContent = msg;
+    setTimeout(function () { label.textContent = old; }, 1800);
+  };
+  var copyText = function (text) {
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+    return new Promise(function (resolve, reject) {
+      var ta = document.createElement("textarea");
+      ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy") ? resolve() : reject(); } catch (e) { reject(e); }
+      document.body.removeChild(ta);
+    });
+  };
+  document.querySelectorAll("[data-copy]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      copyText(btn.getAttribute("data-copy")).then(function () { flash(btn, "Copiato"); }, function () { flash(btn, "Non copiato"); });
+    });
   });
-
-  // ---------------------------------------------------------------- init
-  var y = $("#year"); if (y) y.textContent = new Date().getFullYear();
-  setGuests(2);
-  setLang(initialLang(), false);
+  document.querySelectorAll("[data-copy-target]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var dl = document.getElementById(btn.getAttribute("data-copy-target"));
+      var text = Array.prototype.map.call(dl.children, function (row) {
+        return row.querySelector("dt").textContent + ": " + row.querySelector("dd").textContent;
+      }).join("\n");
+      copyText(text).then(function () {
+        toast.textContent = "Riepilogo copiato, pronto da incollare nel CRM";
+      }, function () {
+        toast.textContent = "Copia non riuscita: seleziona il testo a mano";
+      }).then(function () {
+        toast.classList.add("show");
+        setTimeout(function () { toast.classList.remove("show"); }, 2400);
+      });
+    });
+  });
 })();

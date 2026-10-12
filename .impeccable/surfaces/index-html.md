@@ -5,22 +5,22 @@ primary_target: "index.html"
 related_targets: []
 ---
 
-# Surface brief: Afrodita Chef one-page site (index.html)
+# Surface brief: Aiclo landing page (index.html)
 
-Mode: Persuade. Visitor decides to book a table; action = booking form to WhatsApp.
+Mode: Persuade. A sales leader decides to request a demo; action = "Richiedi una demo gratuita".
 
-Audience/job: Bologna locals and visitors on phones, IT first, EN second. Proof: real room and dish photos, address, contacts. Constraints: static, bilingual, placeholder WhatsApp number, menu is indicative.
+Audience/job: Italian sales directors and their sellers. Proof: the product UI at work (session scoring, team dashboard, seller feedback, CRM summary, mobile recording), published numbers, GDPR facts, FAQ. Constraints: Italian, static, all claims from aiclo.io, demo data labelled.
 
 ## Direction contract
 
-THESIS: The site is the room. Striped wallpaper, a pink back room, polka-dot scalloped lamps, wood. Refuses the generic restaurant template (dark hero photo, centred serif, three equal cards).
+THESIS: The page is a recording being analysed. A live amber waveform is the thread that runs from the hero session to the closing call; the 5%/95% blind spot is shown, not stated. Refuses the SaaS template of eyebrow labels, icon-card grids and a stat-card row.
 
-OWN-WORLD: Brand pink #E774B3 and pale pinks, apple green #A8C870 with deep moss text, beige/white wallpaper stripes, plum ink #3B1830 for the evening booking section. Scalloped section edges like a lamp hem, dots, arch frames like the pink room's doorway. Young Serif display, Hanken Grotesk body, Gochi Hand for handwritten annotations only.
+OWN-WORLD: Warm graphite ground (#0F0E0C) with raised panels, amber #F9A517 as the one brand colour (gradient only on the primary button, as in the app), REC red for live state, soft green/red for score deltas. One drenched amber band for results. Sora display, Onest body, JetBrains Mono only for timers, URLs, scores. Product panels with window chrome; hairline ledgers instead of cards.
 
-STORY: Visitor sees a charming small room and a real plate, understands it is a Bologna restaurant with personality, and books in under a minute via WhatsApp.
+STORY: Visitor sees a real deal being scored, realises they hear 5% of their deals, sees how Aiclo closes the gap for manager and seller, trusts the numbers and the data safety, requests a demo.
 
-FIRST VIEWPORT: Striped wall full-bleed. Giant "Cibo per passione." headline left, a pink polka-dot lamp hanging from the top edge with a warm glow, the dish photo in a tall arch on the right overlapping the headline slightly. Primary "Prenota su WhatsApp" button plus "Menu" link under the headline, header with logo, nav, IT/EN switch.
+FIRST VIEWPORT: Left 6/12: headline "Trasforma ogni trattativa in fatturato, con l'AI." at ~4.5rem, subcopy, primary amber "Richiedi una demo gratuita" + ghost "Guarda come funziona", two guarantees. Right 6/12: the live session panel (REC timer, waveform, transcript line, 3.4/5 score, four scored dimensions filling, miniscript with working Copia). Sticky header with logo, nav, Login, demo button.
 
-FORM: Code-led, direction pinned by the user's brief (boutique/editorial, logo palette), so the roll was skipped; seed key: pinned-by-brief.
+FORM: Code-led, direction pinned by the user's brief (rebuild aiclo.io from the supplied screenshot: dark, amber), roll skipped; seed key: pinned-by-brief. Signature interaction: the 100-deal grid that goes from 5 heard to 100 analysed.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance

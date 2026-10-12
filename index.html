@@ -3,309 +3,482 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Afrodita Chef · Ristorante a Bologna</title>
-  <meta name="description" content="Afrodita Chef, ristorante in Via Rialto 1b a Bologna. Cibo per passione. Prenota il tuo tavolo su WhatsApp.">
-  <meta name="theme-color" content="#F3A6CB">
-  <meta property="og:title" content="Afrodita Chef · Bologna">
-  <meta property="og:description" content="Cibo per passione. Via Rialto 1b, Bologna.">
-  <meta property="og:image" content="assets/piatto.jpg">
-  <link rel="icon" href="assets/logo-mark.png">
-  <link rel="preload" href="fonts/YoungSerif-Regular.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="preload" href="fonts/HankenGrotesk-Variable.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="css/style.css">
+  <title>Aiclo · Conversation Intelligence per i team di vendita</title>
+  <meta name="description" content="Aiclo registra e analizza ogni trattativa, in presenza e in call, e restituisce insight per i manager e suggerimenti mirati a ogni venditore per chiudere di più, più in fretta.">
+  <meta name="theme-color" content="#0F0E0C">
+  <link rel="icon" href="assets/favicon.png">
+  <link rel="preload" href="fonts/sora.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/onest.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <a class="skip" href="#main">Salta al contenuto</a>
 
-<!-- Shared lamp drawing: pink polka-dot scalloped shade. Colours come from CSS variables. -->
-<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
-  <defs>
-    <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
-      <circle cx="5" cy="5" r="3.2" style="fill:var(--dot, #fff)"/>
-      <circle cx="16" cy="16" r="3.2" style="fill:var(--dot, #fff)"/>
-    </pattern>
-  </defs>
-  <symbol id="lamp" viewBox="0 0 260 300">
-    <line x1="130" y1="0" x2="130" y2="58" style="stroke:var(--cord, #3B1830)" stroke-width="3"/>
-    <rect x="121" y="54" width="18" height="16" rx="4" style="fill:var(--cord, #3B1830)"/>
-    <path id="shade" d="M130 66 C 96 66 62 104 28 214 a 15.5 15 0 0 0 31 0 a 15.5 15 0 0 0 31 0 a 15.5 15 0 0 0 31 0 a 15.5 15 0 0 0 31 0 a 15.5 15 0 0 0 31 0 a 15.5 15 0 0 0 31 0 a 15.5 15 0 0 0 31 0 C 198 104 164 66 130 66 Z" style="fill:var(--shade, #E774B3)"/>
-    <path d="M130 66 C 96 66 62 104 28 214 a 15.5 15 0 0 0 31 0 a 15.5 15 0 0 0 31 0 a 15.5 15 0 0 0 31 0 a 15.5 15 0 0 0 31 0 a 15.5 15 0 0 0 31 0 a 15.5 15 0 0 0 31 0 a 15.5 15 0 0 0 31 0 C 198 104 164 66 130 66 Z" fill="url(#dots)"/>
-    <ellipse cx="130" cy="212" rx="96" ry="9" style="fill:var(--rim, #FFE9A8);opacity:var(--lit, .9)"/>
-    <circle cx="130" cy="244" r="15" style="fill:var(--bulb, #FFE9A8);opacity:var(--lit, .9)"/>
-  </symbol>
-</svg>
+  <svg width="0" height="0" class="sprite" aria-hidden="true">
+    <symbol id="logo" viewBox="0 0 153.04 46.37">
+      <path d="M61.22,27.86c0,2.63.84,4.94,2.51,6.87,1.9,2.19,4.38,3.31,7.38,3.31,2.05,0,3.88-.66,5.42-1.97l.41-.35v1.9h4.67v-19.57h-4.67v1.89l-.41-.33c-1.6-1.31-3.53-1.97-5.72-1.97-2.65,0-4.93.99-6.79,2.94-1.86,1.96-2.81,4.4-2.81,7.28ZM67.62,23.82c1.76-1.99,4.46-2.27,7.88-.75l1.24,1.68v6.16l-.04.06c-1.2,1.72-2.9,2.59-5.05,2.59-1.58,0-2.92-.55-3.97-1.63-1.05-1.08-1.58-2.45-1.58-4.08,0-1.55.51-2.9,1.51-4.04Z"/>
+      <rect x="88.33" y="18.05" width="4.88" height="19.57"/>
+      <path d="M90.77,7.5c-1.3,0-2.29.62-3.09,1.91-.39,1.51-.14,2.64.78,3.53.65.62,1.4.92,2.31.92,1.3,0,2.29-.62,3.09-1.91.39-1.51.14-2.64-.78-3.53-.65-.62-1.4-.92-2.31-.92Z"/>
+      <path d="M108.93,33.57c-1.69,0-3.09-.55-4.17-1.62s-1.62-2.45-1.62-4.09.55-2.98,1.62-4.08c1.08-1.11,2.44-1.67,4.05-1.67,1.86,0,3.43.77,4.67,2.29l3.43-3.02c-.91-1.09-2.07-1.99-3.43-2.67-1.44-.71-3.01-1.07-4.67-1.07-2.98,0-5.51,1-7.52,2.97-2.01,1.97-3.03,4.41-3.03,7.25s1,5.27,2.99,7.23c1.98,1.96,4.51,2.95,7.52,2.95,3.62,0,6.57-1.42,8.75-4.21l-3.73-2.8c-.5.68-1.15,1.26-1.93,1.74-.88.53-1.86.8-2.92.8Z"/>
+      <rect x="122.26" y="8.74" width="4.88" height="28.88"/>
+      <path d="M150.05,20.61c-1.98-1.97-4.49-2.97-7.44-2.97s-5.46,1-7.44,2.97c-1.98,1.97-2.99,4.41-2.99,7.25s1,5.27,2.99,7.23c1.98,1.96,4.48,2.95,7.44,2.95s5.46-.99,7.44-2.95,2.99-4.39,2.99-7.23-1-5.28-2.99-7.25ZM146.6,31.92c-1.04,1.09-2.38,1.65-3.99,1.65s-2.95-.56-3.99-1.65c-1.03-1.09-1.56-2.46-1.56-4.06s.52-2.98,1.56-4.08c1.04-1.11,2.38-1.67,3.99-1.67s2.95.56,3.99,1.67c1.03,1.1,1.56,2.48,1.56,4.08s-.52,2.97-1.56,4.06Z"/>
+      <polygon class="mark" points="26.05 0 0 16.28 0 24.03 26.05 40.31 26.05 34.84 4.64 21.46 4.64 18.85 26.05 5.47 26.05 5.16 26.05 0"/>
+      <path class="mark-eye" d="M30.96,18.79c-6.8-5.22-14.55,2.53-9.33,9.33,6.8,5.22,14.55-2.53,9.33-9.33Z"/>
+      <polygon class="mark" points="26.55 46.37 52.6 30.09 52.6 22.34 26.55 6.06 26.55 11.52 47.96 24.91 47.96 27.52 26.55 40.9 26.55 41.21 26.55 46.37"/>
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11" height="11" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M15.5 8.5V6.5a2 2 0 0 0-2-2h-7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h2" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.6-3.2 8.3-7.5 9.5-4.3-1.2-7.5-4.9-7.5-9.5V6z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.8 12.2l2.2 2.2 4.3-4.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-refund" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.4-5.7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M4 4.5v4h4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 8v4l2.8 1.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="6.5" width="12.5" height="11" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M15.5 10.5l5-3v9l-5-3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.6 3.8l2.6-.3 1.6 4.2-2 1.4a11 11 0 0 0 6.1 6.1l1.4-2 4.2 1.6-.3 2.6a2 2 0 0 1-2.1 1.8C10.6 18.8 5.2 13.4 4.8 5.9a2 2 0 0 1 1.8-2.1z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+    <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3 19.5c.6-3.3 3-5.2 6-5.2s5.4 1.9 6 5.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="16.8" cy="9.3" r="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M17.5 14.4c2 .4 3.3 2 3.6 4.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="i-eu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 12h17M12 3.5c2.4 2.4 3.6 5.2 3.6 8.5s-1.2 6.1-3.6 8.5c-2.4-2.4-3.6-5.2-3.6-8.5S9.6 5.9 12 3.5z" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+    <symbol id="i-eyeoff" viewBox="0 0 24 24"><path d="M3 12s3.3-6 9-6c1.6 0 3 .5 4.2 1.1M21 12s-3.3 6-9 6c-1.6 0-3-.5-4.2-1.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M4 20L20 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M9.6 14.4a3.4 3.4 0 0 1 4.8-4.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M11 12l8.5-8.5M16.5 6.5l2.5 2.5M14.5 8.5l2 2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="M6 15l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </svg>
 
-<a class="skip" href="#prenota"><span lang="it">Vai alla prenotazione</span><span lang="en">Skip to booking</span></a>
-
-<header class="site-header" id="top">
-  <a class="brand" href="#top" aria-label="Afrodita Chef">
-    <img src="assets/logo-mark.png" alt="" width="44" height="44">
-    <span class="brand-word">AFRODITACHEF</span>
-  </a>
-  <nav class="nav" id="nav" aria-label="Menu principale">
-    <a href="#locale"><span lang="it">Il locale</span><span lang="en">The room</span></a>
-    <a href="#piatti"><span lang="it">Piatti</span><span lang="en">Dishes</span></a>
-    <a href="#menu">Menu</a>
-    <a href="#dove"><span lang="it">Dove</span><span lang="en">Find us</span></a>
-  </nav>
-  <div class="header-actions">
-    <div class="lang" role="group" aria-label="Lingua / Language">
-      <button type="button" data-set-lang="it" aria-pressed="true">IT</button>
-      <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
-    </div>
-    <a class="btn btn-small" href="#prenota"><span lang="it">Prenota</span><span lang="en">Book</span></a>
-    <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="nav">
-      <span class="sr"><span lang="it">Apri il menu</span><span lang="en">Open menu</span></span>
-      <i></i><i></i>
-    </button>
-  </div>
-</header>
-
-<main>
-
-  <!-- HERO -->
-  <section class="hero" aria-labelledby="hero-title">
-    <div class="hero-lamp" aria-hidden="true">
-      <div class="halo"></div>
-      <svg class="lamp-svg" viewBox="0 0 260 300"><use href="#lamp"/></svg>
-    </div>
-
-    <div class="hero-copy">
-      <h1 id="hero-title">
-        <span lang="it"><span class="l1">Cibo</span> <span class="l2">per</span> <span class="l3">passione.</span></span>
-        <span lang="en"><span class="l1">Food</span> <span class="l2">made with</span> <span class="l3">passion.</span></span>
-      </h1>
-      <p class="lede">
-        <span lang="it">Un piccolo ristorante in Via Rialto, a Bologna. Paste, piatti di stagione e tavoli apparecchiati di rosa.</span>
-        <span lang="en">A small restaurant on Via Rialto, in Bologna. Pasta, seasonal plates and tables set in pink.</span>
-      </p>
-      <div class="cta-row">
-        <a class="btn" href="#prenota">
-          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
-          <span lang="it">Prenota su WhatsApp</span><span lang="en">Book on WhatsApp</span>
-        </a>
-        <a class="link-arrow" href="#menu"><span lang="it">Guarda il menu</span><span lang="en">See the menu</span><span aria-hidden="true"> →</span></a>
+  <header class="site-header" data-header>
+    <div class="wrap header-row">
+      <a class="brand" href="#top" aria-label="Aiclo, torna all'inizio">
+        <svg class="logo" viewBox="0 0 153.04 46.37" aria-hidden="true"><use href="#logo"/></svg>
+      </a>
+      <nav class="nav" id="nav" aria-label="Principale">
+        <a href="#come-funziona">Come funziona</a>
+        <a href="#per-chi">Per il manager</a>
+        <a href="#venditore">Per il team sales</a>
+        <a href="#sicurezza">Sicurezza</a>
+        <a href="#faq">Domande</a>
+        <a class="nav-login" href="https://app.aiclo.io">Login</a>
+      </nav>
+      <div class="header-actions">
+        <a class="link-quiet login" href="https://app.aiclo.io">Login</a>
+        <a class="btn btn-primary btn-sm" href="https://www.aiclo.io/#contatti">Richiedi una demo</a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav" data-menu>
+          <svg aria-hidden="true"><use href="#i-menu"/></svg><span class="sr">Menu</span>
+        </button>
       </div>
     </div>
+  </header>
 
-    <figure class="hero-arch">
-      <img src="assets/piatto.jpg" alt="Orecchiette verdi con salsiccia, cialde croccanti di formaggio e un fiore edibile rosso" width="745" height="990" fetchpriority="high">
-      <svg class="badge" viewBox="0 0 160 160" aria-hidden="true">
-        <defs><path id="circ" d="M80,80 m-58,0 a58,58 0 1,1 116,0 a58,58 0 1,1 -116,0"/></defs>
-        <circle cx="80" cy="80" r="78" style="fill:var(--verde)"/>
-        <text><textPath href="#circ" startOffset="0" textLength="358" lengthAdjust="spacing">VIA RIALTO 1B · BOLOGNA · CIBO PER PASSIONE ·</textPath></text>
-        <path d="M80 112 C 40 88 48 52 66 52 C 74 52 80 58 80 64 C 80 58 86 52 94 52 C 112 52 120 88 80 112 Z" style="fill:var(--rosa)"/>
-      </svg>
-    </figure>
-  </section>
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <h1 class="display">Trasforma ogni trattativa in <span class="amber">fatturato</span>, con&nbsp;l’AI.</h1>
+          <p class="lede">Aiclo registra e analizza ogni trattativa, in presenza e in call, e restituisce insight per i manager e suggerimenti mirati a ogni venditore per chiudere di più, più in fretta.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://www.aiclo.io/#contatti">Richiedi una demo gratuita <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn btn-ghost" href="#come-funziona"><svg aria-hidden="true"><use href="#i-play"/></svg> Guarda come funziona</a>
+          </div>
+          <ul class="assurances">
+            <li><svg aria-hidden="true"><use href="#i-shield"/></svg>Validato su oltre 10.000 trattative reali</li>
+            <li><svg aria-hidden="true"><use href="#i-refund"/></svg>Garanzia soddisfatti o rimborsati 60 giorni</li>
+          </ul>
+        </div>
 
-  <!-- LOCALE -->
-  <section class="locale scallop" id="locale" aria-labelledby="locale-title" style="--c: var(--muro)">
-    <div class="locale-copy">
-      <h2 id="locale-title">
-        <span lang="it">Strisce sui muri, pois sulle lampade, una sala rosa in fondo.</span>
-        <span lang="en">Striped walls, polka-dot lamps and a pink room at the back.</span>
-      </h2>
-      <p>
-        <span lang="it">Il locale è piccolo e si vede tutto subito: i tavoli di legno chiaro, le sedie bianche, il bancone che si affaccia sulla cucina. Ci si siede, si guarda cosa esce dal passe e si sceglie di conseguenza.</span>
-        <span lang="en">The place is small and you take it in at a glance: pale wooden tables, white chairs, a counter that looks onto the kitchen. Sit down, watch what comes off the pass, and order accordingly.</span>
-      </p>
-      <a class="link-arrow" href="#prenota"><span lang="it">Scegli il tuo tavolo</span><span lang="en">Pick your table</span><span aria-hidden="true"> →</span></a>
-    </div>
-    <div class="locale-mosaic">
-      <figure class="m-tall reveal">
-        <img src="assets/locale.jpg" alt="La sala: pareti a righe beige, lampada verde a pois, tavoli in legno e il bancone sulla destra" width="573" height="1020" loading="lazy">
-      </figure>
-      <figure class="m-round reveal">
-        <img src="assets/locale-lampada.jpg" alt="Lampada a pois verde appesa al soffitto" width="240" height="250" loading="lazy">
-      </figure>
-      <figure class="m-rect reveal">
-        <img src="assets/locale-banco.jpg" alt="Il bancone in legno con sgabelli e la cucina sullo sfondo" width="403" height="380" loading="lazy">
-      </figure>
-    </div>
-  </section>
-
-  <!-- PIATTI -->
-  <section class="piatti scallop" id="piatti" aria-labelledby="piatti-title" style="--c: var(--blush)">
-    <figure class="plate reveal">
-      <img src="assets/piatto.jpg" alt="Orecchiette con salsa verde, salsiccia, cialde di formaggio e fiore edibile" width="745" height="990" loading="lazy">
-      <ul class="notes" aria-label="Ingredienti / Ingredients">
-        <li class="n1"><span lang="it">fiore edibile</span><span lang="en">edible flower</span></li>
-        <li class="n2"><span lang="it">cialde croccanti di formaggio</span><span lang="en">crisp cheese wafers</span></li>
-        <li class="n3"><span lang="it">orecchiette</span><span lang="en">orecchiette</span></li>
-        <li class="n4"><span lang="it">salsiccia</span><span lang="en">sausage</span></li>
-      </ul>
-    </figure>
-    <div class="piatti-copy">
-      <h2 id="piatti-title">
-        <span lang="it">Un piatto, pezzo per pezzo.</span>
-        <span lang="en">One plate, piece by piece.</span>
-      </h2>
-      <p>
-        <span lang="it">Orecchiette in salsa verde con salsiccia sgranata, cialde di formaggio croccanti e un fiore sopra. Il colore è parte del piatto, e lo si capisce dalla foto.</span>
-        <span lang="en">Orecchiette in a green sauce with crumbled sausage, crisp cheese wafers and a flower on top. The colour is part of the dish, and the photo shows it.</span>
-      </p>
-      <div class="detail-strip">
-        <figure class="reveal"><img src="assets/piatto-fiore.jpg" alt="Dettaglio del fiore edibile" width="310" height="300" loading="lazy"></figure>
-        <figure class="reveal"><img src="assets/piatto-croccante.jpg" alt="Dettaglio delle cialde croccanti" width="420" height="460" loading="lazy"></figure>
-        <figure class="reveal"><img src="assets/piatto-orecchiette.jpg" alt="Dettaglio delle orecchiette" width="765" height="520" loading="lazy"></figure>
+        <figure class="panel session" aria-label="Esempio di analisi di una trattativa (dati dimostrativi)">
+          <div class="chrome">
+            <span class="rec"><i></i>REC</span>
+            <span class="mono timer" data-timer>12:04</span>
+            <span class="mono url">app.aiclo.io/trattative/acme-corp</span>
+          </div>
+          <div class="session-head">
+            <span class="avatar">MR</span>
+            <div>
+              <strong>Marco Rossi</strong>
+              <span class="muted">Demo · Acme Corp, analisi trattativa</span>
+            </div>
+            <div class="score"><span class="mono" data-count="3.4" data-decimals="1">3.4</span><small>/5</small></div>
+          </div>
+          <div class="wave" data-wave="56" aria-hidden="true"></div>
+          <p class="transcript" aria-live="off"><span class="who">Cliente</span><span data-transcript>“Il prezzo è più alto di quanto avevamo messo a budget.”</span></p>
+          <ul class="dims">
+            <li><span>Rapport</span><b class="bar"><i style="--v:.82"></i></b><span class="mono">82</span></li>
+            <li><span>Gestione obiezioni</span><b class="bar"><i style="--v:.60"></i></b><span class="mono">60</span></li>
+            <li><span>Prossimi step</span><b class="bar warn"><i style="--v:.42"></i></b><span class="mono">42</span></li>
+            <li><span>Negoziazione</span><b class="bar"><i style="--v:.71"></i></b><span class="mono">71</span></li>
+          </ul>
+          <div class="notes">
+            <p class="note good"><svg aria-hidden="true"><use href="#i-up"/></svg>Scoperta dell’esigenza budget ben condotta.</p>
+            <p class="note bad"><svg aria-hidden="true"><use href="#i-down"/></svg>Chiusura debole: nessun next step a data certa.</p>
+          </div>
+          <div class="miniscript">
+            <div class="miniscript-head">
+              <span>Miniscript · obiezione budget</span>
+              <button class="copy" type="button" data-copy="Capisco: il vero problema è la disponibilità economica o non vede ancora un ritorno sufficiente sull’investimento?"><svg aria-hidden="true"><use href="#i-copy"/></svg><span>Copia</span></button>
+            </div>
+            <p>“Capisco: il vero problema è la disponibilità economica o non vede ancora un ritorno sufficiente sull’investimento?”</p>
+          </div>
+        </figure>
       </div>
-    </div>
-  </section>
 
-  <!-- MENU -->
-  <section class="menu scallop" id="menu" aria-labelledby="menu-title" style="--c: var(--verde)">
-    <div class="menu-head">
-      <h2 id="menu-title">Menu</h2>
-      <p class="menu-note">
-        <span lang="it">Menu indicativo: cambia con le stagioni. Chiedi in sala le novità e, se hai allergie, dillo prima di ordinare.</span>
-        <span lang="en">Sample menu: it changes with the seasons. Ask in the room for what's new, and tell us about allergies before you order.</span>
-      </p>
-    </div>
-    <div class="menu-grid">
-      <div class="course">
-        <h3><span lang="it">Antipasti</span><span lang="en">Starters</span></h3>
-        <dl>
-          <dt><span lang="it">Crescentine con salumi</span><span lang="en">Crescentine with cured meats</span></dt>
-          <dd><span lang="it">Pane fritto emiliano, salumi tagliati al momento.</span><span lang="en">Fried Emilian bread, cured meats sliced to order.</span></dd>
-          <dt><span lang="it">Tortino di zucca</span><span lang="en">Pumpkin tart</span></dt>
-          <dd><span lang="it">Fonduta di Parmigiano e semi tostati.</span><span lang="en">Parmigiano cream and toasted seeds.</span></dd>
-          <dt><span lang="it">Verdure di stagione</span><span lang="en">Seasonal vegetables</span></dt>
-          <dd><span lang="it">In pastella leggera, con salsa allo yogurt.</span><span lang="en">In a light batter, with yoghurt sauce.</span></dd>
+      <div class="wrap ledger-wrap">
+        <dl class="ledger">
+          <div><dt>team commerciali attivi</dt><dd>+200</dd></div>
+          <div><dt>trattative analizzate</dt><dd>+10.000</dd></div>
+          <div><dt>settori diversi</dt><dd>+30</dd></div>
+          <div><dt>per essere operativi</dt><dd>15 giorni</dd></div>
         </dl>
-      </div>
-      <div class="course">
-        <h3><span lang="it">Primi</span><span lang="en">Pasta</span></h3>
-        <dl>
-          <dt><span lang="it">Orecchiette, cime di rapa e salsiccia</span><span lang="en">Orecchiette, turnip tops and sausage</span> <em class="pic"><span lang="it">in foto</span><span lang="en">pictured</span></em></dt>
-          <dd><span lang="it">Cialde di formaggio croccanti e fiore edibile.</span><span lang="en">Crisp cheese wafers and an edible flower.</span></dd>
-          <dt><span lang="it">Tagliatelle al ragù</span><span lang="en">Tagliatelle with ragù</span></dt>
-          <dd><span lang="it">Ragù alla bolognese, cotto piano.</span><span lang="en">Bolognese ragù, slow-cooked.</span></dd>
-          <dt><span lang="it">Tortellini in brodo</span><span lang="en">Tortellini in broth</span></dt>
-          <dd><span lang="it">Brodo di carne, tortellini ripieni.</span><span lang="en">Meat broth, filled tortellini.</span></dd>
-        </dl>
-      </div>
-      <div class="course">
-        <h3><span lang="it">Secondi</span><span lang="en">Mains</span></h3>
-        <dl>
-          <dt><span lang="it">Cotoletta alla bolognese</span><span lang="en">Bolognese veal cutlet</span></dt>
-          <dd><span lang="it">Prosciutto crudo e Parmigiano Reggiano.</span><span lang="en">Prosciutto and Parmigiano Reggiano.</span></dd>
-          <dt><span lang="it">Tagliata di manzo</span><span lang="en">Sliced beef</span></dt>
-          <dd><span lang="it">Rucola, scaglie di grana, aceto balsamico.</span><span lang="en">Rocket, grana shavings, balsamic vinegar.</span></dd>
-          <dt><span lang="it">Parmigiana di melanzane</span><span lang="en">Aubergine parmigiana</span></dt>
-          <dd><span lang="it">Pomodoro, basilico, mozzarella.</span><span lang="en">Tomato, basil, mozzarella.</span></dd>
-        </dl>
-      </div>
-      <div class="course">
-        <h3><span lang="it">Dolci</span><span lang="en">Desserts</span></h3>
-        <dl>
-          <dt><span lang="it">Zuppa inglese</span><span lang="en">Zuppa inglese</span></dt>
-          <dd><span lang="it">Crema, cioccolato e Alchermes, come a Bologna.</span><span lang="en">Custard, chocolate and Alchermes, Bolognese style.</span></dd>
-          <dt><span lang="it">Tiramisù</span><span lang="en">Tiramisù</span></dt>
-          <dd><span lang="it">Mascarpone, caffè, cacao.</span><span lang="en">Mascarpone, coffee, cocoa.</span></dd>
-          <dt><span lang="it">Panna cotta</span><span lang="en">Panna cotta</span></dt>
-          <dd><span lang="it">Con frutti di bosco.</span><span lang="en">With berries.</span></dd>
-        </dl>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRENOTA -->
-  <section class="book scallop" id="prenota" aria-labelledby="book-title" style="--c: var(--prugna)">
-    <div class="book-intro">
-      <div class="book-lamp" aria-hidden="true">
-        <div class="halo"></div>
-        <svg class="lamp-svg" viewBox="0 0 260 300"><use href="#lamp"/></svg>
-      </div>
-      <h2 id="book-title">
-        <span lang="it">Prenota un tavolo.</span>
-        <span lang="en">Book a table.</span>
-      </h2>
-      <p>
-        <span lang="it">Compila i campi: ti si apre WhatsApp con il messaggio già scritto. Il tavolo è confermato quando ti rispondiamo.</span>
-        <span lang="en">Fill in the fields and WhatsApp opens with the message already written. Your table is confirmed once we reply.</span>
-      </p>
-    </div>
-
-    <form class="book-form" id="book-form" novalidate>
-      <div class="field">
-        <label for="f-name"><span lang="it">Nome</span><span lang="en">Name</span></label>
-        <input id="f-name" name="name" type="text" autocomplete="name" required>
-        <span class="err" data-err="name" role="alert"></span>
-      </div>
-      <div class="field">
-        <label for="f-phone"><span lang="it">Telefono</span><span lang="en">Phone</span> <small><span lang="it">(facoltativo)</span><span lang="en">(optional)</span></small></label>
-        <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel">
-      </div>
-      <div class="field">
-        <label for="f-date"><span lang="it">Data</span><span lang="en">Date</span></label>
-        <input id="f-date" name="date" type="date" required>
-        <span class="err" data-err="date" role="alert"></span>
-      </div>
-      <div class="field">
-        <label for="f-time"><span lang="it">Orario</span><span lang="en">Time</span></label>
-        <select id="f-time" name="time" required>
-          <option value="" data-it="Scegli" data-en="Choose"></option>
-          <optgroup data-it="Pranzo" data-en="Lunch" label="Pranzo">
-            <option>12:30</option><option>13:00</option><option>13:30</option><option>14:00</option>
-          </optgroup>
-          <optgroup data-it="Cena" data-en="Dinner" label="Cena">
-            <option>19:30</option><option>20:00</option><option>20:30</option><option>21:00</option><option>21:30</option>
-          </optgroup>
-        </select>
-        <span class="err" data-err="time" role="alert"></span>
-      </div>
-      <div class="field field-guests">
-        <label id="guests-label"><span lang="it">Persone</span><span lang="en">Guests</span></label>
-        <div class="stepper" role="group" aria-labelledby="guests-label">
-          <button type="button" id="g-minus" aria-label="−"><span aria-hidden="true">−</span></button>
-          <output id="g-out" for="g-minus g-plus" aria-live="polite">2</output>
-          <button type="button" id="g-plus" aria-label="+"><span aria-hidden="true">+</span></button>
+        <div class="channels">
+          <p>Funziona con gli strumenti che usi già</p>
+          <ul>
+            <li><svg aria-hidden="true"><use href="#i-video"/></svg>Zoom</li>
+            <li><svg aria-hidden="true"><use href="#i-video"/></svg>Google Meet</li>
+            <li><svg aria-hidden="true"><use href="#i-video"/></svg>Microsoft Teams</li>
+            <li><svg aria-hidden="true"><use href="#i-phone"/></svg>Telefono</li>
+            <li><svg aria-hidden="true"><use href="#i-people"/></svg>Appuntamenti dal vivo</li>
+          </ul>
         </div>
       </div>
-      <div class="field field-wide">
-        <label for="f-notes"><span lang="it">Note, allergie, seggiolone…</span><span lang="en">Notes, allergies, high chair…</span></label>
-        <textarea id="f-notes" name="notes" rows="2"></textarea>
+    </section>
+
+    <!-- PROBLEMA -->
+    <section class="section problem" id="problema" aria-labelledby="problem-title">
+      <div class="wrap problem-grid">
+        <div class="problem-copy">
+          <h2 id="problem-title" class="h2">I manager ascoltano solo il <span class="amber">5%</span> delle trattative. Il restante 95% è un punto cieco.</h2>
+          <p class="body-lg">Non per mancanza di volontà, ma perché ascoltare centinaia di trattative ogni mese è fisicamente impossibile. E senza dati, il coaching resta un’opinione.</p>
+          <ul class="quotes">
+            <li>Facciamo formazione, ma non so se viene davvero applicata nelle trattative.</li>
+            <li>Ci sono venditori che vendono e altri che non vendono. Non capisco perché.</li>
+            <li>I miei manager non hanno tempo per ascoltare le trattative di tutti.</li>
+            <li>Valuto i venditori sui numeri, ma non so cosa fanno di diverso i migliori.</li>
+          </ul>
+        </div>
+
+        <div class="coverage" data-coverage data-state="today">
+          <div class="seg" role="group" aria-label="Copertura delle trattative">
+            <button type="button" aria-pressed="true" data-set="today">Oggi</button>
+            <button type="button" aria-pressed="false" data-set="aiclo">Con Aiclo</button>
+          </div>
+          <div class="grid100" data-grid aria-hidden="true"></div>
+          <p class="coverage-read" aria-live="polite">
+            <span class="mono big" data-cov-num>5</span><span class="mono pct">%</span>
+            <span class="coverage-label" data-cov-label>delle trattative ascoltate da un manager</span>
+          </p>
+          <p class="fineprint">Ogni quadrato è una trattativa del mese.</p>
+        </div>
       </div>
+    </section>
 
-      <div class="bubble-wrap">
-        <p class="bubble-label"><span lang="it">Il messaggio che invieremo</span><span lang="en">The message we'll send</span></p>
-        <div class="bubble" id="preview" aria-live="polite"></div>
+    <!-- COME FUNZIONA -->
+    <section class="section how" id="come-funziona" aria-labelledby="how-title">
+      <div class="wrap">
+        <h2 id="how-title" class="h2 narrow">Dalla trattativa agli insight, in automatico.</h2>
+        <ol class="steps">
+          <li>
+            <span class="step-n mono">01</span>
+            <h3>Registra ogni trattativa</h3>
+            <p>Aiclo entra automaticamente nelle videocall dal calendario. Per gli appuntamenti dal vivo e le telefonate, basta avviare la registrazione dall’app Aiclo per iPhone e Android prima di iniziare. Nessuna interruzione al workflow del venditore.</p>
+          </li>
+          <li>
+            <span class="step-n mono">02</span>
+            <h3>L’AI analizza e valuta</h3>
+            <p>Ogni trattativa viene trascritta e analizzata secondo le scorecard che hai configurato. Rapport, gestione obiezioni, prossimi step, negoziazione: Aiclo valuta tutto, trattativa per trattativa.</p>
+          </li>
+          <li>
+            <span class="step-n mono">03</span>
+            <h3>Il manager vede tutto, subito</h3>
+            <p>Dashboard con i punteggi di ogni venditore, pattern che si ripetono, trattative a rischio da recuperare. Non più campioni casuali: il 100% delle conversazioni, analizzato.</p>
+          </li>
+        </ol>
+
+        <figure class="panel dashboard" aria-label="Dashboard del team (dati dimostrativi)">
+          <div class="chrome">
+            <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="mono url">app.aiclo.io/team/dashboard</span>
+          </div>
+          <div class="dash-body">
+            <div class="dash-team">
+              <p class="panel-label">Team · giugno</p>
+              <ul class="team">
+                <li><span class="avatar">MR</span><span class="name">Marco Rossi</span><b class="bar"><i style="--v:.82"></i></b><span class="mono val up">82 <svg aria-hidden="true"><use href="#i-up"/></svg></span></li>
+                <li><span class="avatar">GC</span><span class="name">Giulia Conti</span><b class="bar"><i style="--v:.74"></i></b><span class="mono val up">74 <svg aria-hidden="true"><use href="#i-up"/></svg></span></li>
+                <li><span class="avatar">LV</span><span class="name">Luca Verdi</span><b class="bar warn"><i style="--v:.48"></i></b><span class="mono val down">48 <svg aria-hidden="true"><use href="#i-down"/></svg></span></li>
+                <li><span class="avatar">SN</span><span class="name">Sara Neri</span><b class="bar"><i style="--v:.67"></i></b><span class="mono val flat">67 <span aria-hidden="true">–</span></span></li>
+              </ul>
+            </div>
+            <div class="dash-act">
+              <p class="panel-label">Dove intervenire</p>
+              <div class="alert risk">
+                <strong>2 trattative a rischio</strong>
+                <span>Sigma e Nord Spa, obiezione prezzo non gestita.</span>
+              </div>
+              <div class="alert coach">
+                <strong>Coaching suggerito</strong>
+                <span>Luca: ripasso gestione obiezioni con Marco.</span>
+              </div>
+            </div>
+          </div>
+        </figure>
       </div>
+    </section>
 
-      <button class="btn btn-wa" type="submit">
-        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
-        <span lang="it">Invia su WhatsApp</span><span lang="en">Send on WhatsApp</span>
-      </button>
-      <p class="form-status" id="form-status" role="status"></p>
-    </form>
-  </section>
+    <!-- PER CHI -->
+    <section class="section audience" id="per-chi" aria-labelledby="aud-title">
+      <div class="wrap">
+        <h2 id="aud-title" class="h2 narrow">Un alleato per chi guida il team, uno strumento per chi vende.</h2>
+        <div class="split">
+          <article>
+            <h3>Per il direttore commerciale</h3>
+            <p class="split-lede">Smetti di basare le decisioni su dati parziali e sensazioni.</p>
+            <ul class="checks">
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg>Vedi cosa succede in ogni trattativa, senza ascoltarle una per una</li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg>Capisci perché i migliori vendono di più e replica quel metodo</li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg>Individua le trattative a rischio prima che sia troppo tardi</li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg>Misura l’impatto del tuo coaching con dati oggettivi</li>
+            </ul>
+            <a class="link-arrow" href="#come-funziona">Vedi la dashboard <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </article>
+          <article>
+            <h3>Per il venditore</h3>
+            <p class="split-lede">Ricevi feedback mirati dopo ogni trattativa, non giudizi generici.</p>
+            <ul class="checks">
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg>Scopri esattamente dove puoi migliorare, trattativa per trattativa</li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg>Accedi ai miniscript per gestire le obiezioni che emergono più spesso</li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg>Risparmia tempo su note, riepiloghi e follow-up: li scrive Aiclo</li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg>Monitora i tuoi progressi nel tempo con dati concreti</li>
+            </ul>
+            <a class="link-arrow" href="#venditore">Scopri le funzionalità <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </article>
+        </div>
+      </div>
+    </section>
 
-  <!-- DOVE -->
-  <section class="dove scallop" id="dove" aria-labelledby="dove-title" style="--c: var(--blush)">
-    <h2 id="dove-title"><span lang="it">Dove siamo.</span><span lang="en">Where to find us.</span></h2>
-    <address>
-      <a class="addr" href="https://www.google.com/maps/search/?api=1&amp;query=Afrodita+Chef+Via+Rialto+1b+40124+Bologna" target="_blank" rel="noopener">Via Rialto, 1b<br>40124 Bologna</a>
-      <ul class="contacts">
-        <li><span class="k"><span lang="it">Telefono</span><span lang="en">Phone</span></span><a href="tel:+39051232423">+39 051 23 24 23</a></li>
-        <li><span class="k">Email</span><a href="mailto:sabina@afroditachef.it">sabina@afroditachef.it</a></li>
-      </ul>
-      <a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&amp;query=Afrodita+Chef+Via+Rialto+1b+40124+Bologna" target="_blank" rel="noopener"><span lang="it">Apri in Maps</span><span lang="en">Open in Maps</span><span aria-hidden="true"> ↗</span></a>
-    </address>
-  </section>
-</main>
+    <!-- RISULTATI (banda ambra) -->
+    <section class="results" aria-labelledby="res-title">
+      <div class="wave wave-band" data-wave="120" aria-hidden="true"></div>
+      <div class="wrap">
+        <h2 id="res-title" class="h2">Risultati misurabili, non promesse.</h2>
+        <dl class="results-ledger">
+          <div><dd><span data-count="100">100</span>%</dd><dt>delle trattative analizzate</dt><p>contro il campione limitato che un manager riesce ad ascoltare</p></div>
+          <div><dd>−<span data-count="80">80</span>%</dd><dt>tempo dedicato al coaching</dt><p>i manager sanno esattamente dove intervenire</p></div>
+          <div><dd>+<span data-count="25">25</span>%</dd><dt>conversioni, in media</dt><p>riscontrato dai venditori che usano Aiclo</p></div>
+          <div><dd>+<span data-count="33">33</span>%</dd><dt>produttività</dt><p>meno tempo su note, ricerche e follow-up manuali</p></div>
+        </dl>
+        <p class="results-note">Su base dati interni Aiclo, in media sui clienti attivi.</p>
+      </div>
+    </section>
 
-<footer class="site-footer">
-  <img src="assets/logo.png" alt="Afrodita Chef · cibo per passione" width="227" height="117">
-  <p>© <span id="year">2026</span> Afrodita Chef · Via Rialto 1b, Bologna</p>
-</footer>
+    <!-- VENDITORE -->
+    <section class="section seller" id="venditore" aria-labelledby="seller-title">
+      <div class="wrap feature-grid">
+        <div class="feature-copy">
+          <h2 id="seller-title" class="h2">Dopo ogni trattativa, il venditore sa esattamente cosa fare.</h2>
+          <p class="body-lg">Non un riepilogo generico. Suggerimenti concreti, calibrati sulla conversazione che ha appena avuto.</p>
+          <ul class="checks">
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Le obiezioni emerse, con frasi pronte per gestirle la prossima volta</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Le leve specifiche per affrontare quel cliente nel follow-up</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>L’email di follow-up, pronta da inviare al cliente</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Una lista di azioni concrete da completare prima del prossimo appuntamento</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Il punteggio su ogni dimensione, con spiegazione di cosa migliorare</li>
+          </ul>
+          <p class="aside">Ogni trattativa diventa una lezione. Il venditore migliora da solo, senza aspettare la sessione di coaching del manager.</p>
+        </div>
 
-<!-- WhatsApp glyph -->
-<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
-  <symbol id="wa" viewBox="0 0 24 24">
-    <path fill="currentColor" d="M12.04 2C6.5 2 2 6.46 2 11.96c0 1.9.54 3.7 1.5 5.24L2.1 22l4.96-1.37a10 10 0 0 0 4.98 1.33C17.58 21.96 22 17.5 22 12S17.58 2 12.04 2Zm0 18.2c-1.5 0-2.97-.4-4.25-1.16l-.3-.18-2.94.81.8-2.86-.2-.3a8.2 8.2 0 0 1-1.28-4.4c0-4.5 3.7-8.15 8.2-8.15 4.5 0 8.16 3.66 8.16 8.15 0 4.5-3.66 8.09-8.19 8.09Zm4.5-6.1c-.25-.12-1.45-.72-1.68-.8-.22-.08-.39-.12-.55.12-.16.25-.63.8-.77.96-.14.17-.28.19-.53.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.22-1.46-1.37-1.7-.14-.25-.02-.38.1-.5.12-.11.25-.28.37-.42.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.55-1.33-.76-1.82-.2-.48-.4-.41-.55-.42h-.47c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.03 0 1.2.87 2.35 1 2.52.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.1.16 1.52.1.46-.07 1.45-.6 1.65-1.17.2-.57.2-1.06.14-1.17-.06-.1-.22-.16-.47-.28Z"/>
-  </symbol>
-</svg>
+        <figure class="panel feedback" aria-label="Feedback al venditore (dati dimostrativi)">
+          <div class="chrome">
+            <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="mono url">app.aiclo.io/venditori/marco-rossi</span>
+          </div>
+          <div class="session-head">
+            <span class="avatar">MR</span>
+            <div><strong>Marco Rossi</strong><span class="muted">Demo · Acme Corp, feedback trattativa</span></div>
+            <div class="score"><span class="mono">3.4</span><small>/5</small></div>
+          </div>
+          <div class="fb-cols">
+            <div class="note good"><svg aria-hidden="true"><use href="#i-up"/></svg><div><b>Punti di forza</b>Scoperta esigenza budget condotta bene.</div></div>
+            <div class="note bad"><svg aria-hidden="true"><use href="#i-down"/></svg><div><b>Da migliorare</b>Chiusura senza next step a data certa.</div></div>
+          </div>
+          <div class="miniscript">
+            <div class="miniscript-head"><span>Miniscript · obiezione budget</span></div>
+            <p>“Capisco: il vero problema è la disponibilità economica o non vede ancora un ritorno sufficiente sull’investimento?”</p>
+          </div>
+          <fieldset class="todo">
+            <legend class="panel-label">Azioni prima del prossimo appuntamento</legend>
+            <label><input type="checkbox" checked><span>Fissa la demo tecnica entro venerdì</span></label>
+            <label><input type="checkbox"><span>Coinvolgi il socio assente al prossimo incontro</span></label>
+            <label><input type="checkbox"><span>Invia proposta con ROI a 2 mesi</span></label>
+          </fieldset>
+        </figure>
+      </div>
+    </section>
 
-<script src="js/main.js"></script>
+    <!-- CRM -->
+    <section class="section crm" aria-labelledby="crm-title">
+      <div class="wrap feature-grid reverse">
+        <div class="feature-copy">
+          <h2 id="crm-title" class="h2">Aggiorna il CRM con un click.</h2>
+          <p class="body-lg">Aiclo genera il riepilogo strutturato di ogni trattativa: oggettivo, completo, pronto per essere incollato nel CRM con un click.</p>
+          <ul class="checks">
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Niente più note incomplete scritte a memoria dopo la trattativa</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Il riepilogo è già formattato: copia e incolla in tre secondi</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>I venditori passano più tempo a vendere, meno a scrivere</li>
+          </ul>
+          <p class="inline-stat"><span class="mono amber">+33%</span> di produttività media nei team che usano Aiclo <small>Su base dati interni Aiclo, in media sui clienti attivi.</small></p>
+        </div>
+
+        <figure class="panel summary" aria-label="Riepilogo per il CRM (dati dimostrativi)">
+          <div class="summary-head">
+            <div><p class="panel-label">Riepilogo trattativa</p><strong>Acme Corp · Demo prodotto</strong></div>
+            <button class="btn btn-primary btn-sm" type="button" data-copy-target="crm-text"><svg aria-hidden="true"><use href="#i-copy"/></svg><span>Copia nel CRM</span></button>
+          </div>
+          <dl class="summary-body" id="crm-text">
+            <div><dt>Esigenza</dt><dd>Ridurre i tempi di onboarding dei nuovi agenti sul territorio.</dd></div>
+            <div><dt>Budget</dt><dd>Definito per l’anno in corso, sotto la prima proposta.</dd></div>
+            <div><dt>Decisori</dt><dd>Direttore commerciale presente; socio assente, da coinvolgere.</dd></div>
+            <div><dt>Obiezioni</dt><dd>Prezzo rispetto al budget; tempi di attivazione.</dd></div>
+            <div><dt>Prossimi step</dt><dd>Demo tecnica entro venerdì, proposta con ROI a 2 mesi.</dd></div>
+          </dl>
+          <p class="toast" role="status" data-toast></p>
+        </figure>
+      </div>
+    </section>
+
+    <!-- FORMAZIONE -->
+    <section class="section library" aria-labelledby="lib-title">
+      <div class="wrap feature-grid">
+        <div class="feature-copy">
+          <h2 id="lib-title" class="h2">Il metodo dei tuoi migliori venditori diventa patrimonio di tutto il team.</h2>
+          <p class="body-lg">Le trattative vincenti non finiscono in un archivio dimenticato. Diventano materiale formativo reale, sempre disponibile.</p>
+          <ul class="checks">
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Organizza le migliori trattative in raccolte per ruolo o obiettivo</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>I nuovi venditori imparano da esempi reali, non da slide generiche</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Quando un top performer lascia, il suo metodo resta in azienda</li>
+          </ul>
+        </div>
+        <figure class="panel playlist" aria-label="Raccolta di trattative per la formazione (dati dimostrativi)">
+          <div class="pl-head">
+            <p class="panel-label">Raccolta</p>
+            <strong>Gestire l’obiezione prezzo</strong>
+            <span class="muted">4 trattative · per i nuovi ingressi</span>
+          </div>
+          <ol class="tracks">
+            <li class="playing"><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span><span class="t-title">Acme Corp · demo prodotto</span><span class="t-who">Marco Rossi</span><span class="mono t-len">38:12</span></li>
+            <li><span class="mono t-n">2</span><span class="t-title">Nord Spa · rinnovo annuale</span><span class="t-who">Giulia Conti</span><span class="mono t-len">24:50</span></li>
+            <li><span class="mono t-n">3</span><span class="t-title">Studio Bianchi · primo incontro</span><span class="t-who">Marco Rossi</span><span class="mono t-len">51:03</span></li>
+            <li><span class="mono t-n">4</span><span class="t-title">Sigma · negoziazione finale</span><span class="t-who">Sara Neri</span><span class="mono t-len">19:27</span></li>
+          </ol>
+        </figure>
+        <blockquote class="pull">La formazione migliore non si costruisce in aula. Si costruisce dalle trattative che il tuo team fa ogni giorno.</blockquote>
+      </div>
+    </section>
+
+    <!-- APP -->
+    <section class="section app" aria-labelledby="app-title">
+      <div class="wrap app-grid">
+        <div class="phone">
+          <img src="assets/app-recording.webp" width="921" height="2000" alt="L’app Aiclo durante la registrazione di una riunione dal vivo: timer 00:04 in corso, forma d’onda ambra, pulsanti Pausa, Interrompi e Crea Riunione." loading="lazy" decoding="async">
+        </div>
+        <div class="feature-copy">
+          <h2 id="app-title" class="h2">Registra i meeting dal vivo, direttamente dal telefono.</h2>
+          <p class="body-lg">Con l’app Aiclo per iPhone e Android registri gli appuntamenti in presenza in un tap e consulti meeting, analisi e dashboard ovunque ti trovi.</p>
+          <ul class="checks">
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Registrazione degli appuntamenti in presenza più rapida e semplice: un tap e sei operativo</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Consulta meeting, trascrizioni e analisi AI direttamente da mobile</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Dashboard e punteggi del team sempre con te, ovunque</li>
+          </ul>
+          <div class="stores">
+            <a href="https://apps.apple.com/" aria-label="Scarica Aiclo su App Store"><img src="assets/appstore.svg" alt="" width="135" height="40"></a>
+            <a href="https://play.google.com/store" aria-label="Scarica Aiclo su Google Play"><img src="assets/googleplay.png" alt="" width="135" height="40"></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SICUREZZA -->
+    <section class="section security" id="sicurezza" aria-labelledby="sec-title">
+      <div class="wrap sec-grid">
+        <div>
+          <h2 id="sec-title" class="h2">I tuoi dati restano tuoi. Sempre.</h2>
+          <p class="body-lg">Aiclo è conforme al GDPR. I dati sono gestiti su server europei. Nessun membro del nostro team, né terze parti, ha accesso alle conversazioni nel tuo account.</p>
+          <a class="link-arrow" href="https://www.aiclo.io/sicurezza">Scopri come gestiamo i tuoi dati <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+        <ul class="sec-list">
+          <li><svg aria-hidden="true"><use href="#i-shield"/></svg><div><h3>Conformità GDPR completa</h3><p>Gestione dati secondo la normativa europea, senza eccezioni.</p></div></li>
+          <li><svg aria-hidden="true"><use href="#i-eu"/></svg><div><h3>Server in Europa</h3><p>I tuoi dati non escono mai dall’Unione Europea.</p></div></li>
+          <li><svg aria-hidden="true"><use href="#i-eyeoff"/></svg><div><h3>Accesso zero da parte nostra</h3><p>Nessuno di Aiclo può leggere le tue conversazioni.</p></div></li>
+          <li><svg aria-hidden="true"><use href="#i-key"/></svg><div><h3>Controllo granulare degli accessi</h3><p>Decidi tu chi vede cosa, per ogni membro del team.</p></div></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="closing" aria-labelledby="close-title">
+      <div class="wrap closing-inner">
+        <h2 id="close-title" class="display-2">Pronto a vedere cosa succede davvero nelle tue trattative?</h2>
+        <p class="body-lg">30 minuti con un nostro specialista. Ti mostriamo Aiclo sul tuo caso specifico, niente demo preregistrate.</p>
+        <div class="cta-row center">
+          <a class="btn btn-primary btn-lg" href="https://www.aiclo.io/#contatti">Richiedi una demo gratuita <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-ghost btn-lg" href="#come-funziona"><svg aria-hidden="true"><use href="#i-play"/></svg> Guarda come funziona</a>
+        </div>
+        <p class="guarantee"><svg aria-hidden="true"><use href="#i-refund"/></svg>60 giorni soddisfatto o rimborsato. Senza asterischi, senza trucchetti.</p>
+      </div>
+      <div class="wave wave-close" data-wave="140" aria-hidden="true"></div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section faq" id="faq" aria-labelledby="faq-title">
+      <div class="wrap faq-grid">
+        <h2 id="faq-title" class="h2">Domande frequenti</h2>
+        <div class="faq-list">
+          <details>
+            <summary>I miei venditori accetteranno di essere registrati?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <p>È la domanda che ci fanno quasi tutti. La risposta breve è: sì, molto più facilmente di quanto pensi. Aiclo non è uno strumento di controllo, è uno strumento di crescita. I venditori che lo usano ricevono feedback mirati dopo ogni trattativa e vedono i propri progressi nel tempo. Nella pratica, chi lo usa lo apprezza perché lo aiuta a vendere meglio. Gestiamo anche la comunicazione interna al team: il nostro Customer Success Manager ti affianca in questa fase.</p>
+          </details>
+          <details>
+            <summary>Ho già un CRM. Aiclo lo sostituisce?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <p>No, lo completa. Il CRM ti dice in che fase sono le trattative e quanto hai venduto. Aiclo ti dice cosa è successo dentro quelle trattative e perché alcune si sono chiuse e altre no. I riepiloghi generati da Aiclo si copiano nel CRM con un click, eliminando il lavoro manuale dei venditori.</p>
+          </details>
+          <details>
+            <summary>Funziona anche per trattative dal vivo, non solo in videocall?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <p>Sì, ed è uno dei nostri differenziatori principali. Aiclo registra videocall (Zoom, Google Meet, Microsoft Teams) entrando automaticamente dal calendario, telefonate tramite il VoIP integrato, e appuntamenti dal vivo tramite l’app Aiclo per iPhone e Android, avviata prima dell’incontro. Funziona per reti di agenti sul territorio, team misti e qualsiasi combinazione di canale commerciale.</p>
+          </details>
+          <details>
+            <summary>Quali lingue supporta Aiclo?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <p>Aiclo riesce a trascrivere, analizzare e creare report di analisi in più di 100 lingue, tra cui inglese, spagnolo, tedesco, cinese, portoghese, francese e chiaramente l’italiano. E non ci spaventa neanche qualche parola in dialetto.</p>
+          </details>
+          <details>
+            <summary>Come fa Aiclo a essere esperto del mio prodotto e del mio settore?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <p>Aiclo si basa sui modelli AI più potenti in circolazione, come quelli di OpenAI e Claude, e per questo possiede conoscenze tecniche su ogni settore, anche il tuo. È stato testato su oltre 10.000 trattative in più di 30 settori differenti e impara dalle tue stesse trattative di vendita. Inoltre, l’onboarding prevede una fase di training della piattaforma basata sui tuoi materiali, procedure aziendali e script.</p>
+          </details>
+          <details>
+            <summary>Quanto tempo ci vuole per essere operativi?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <p>In media 15 giorni, con 2 sessioni di configurazione guidata. Un nostro Customer Success Manager ti affianca nella personalizzazione delle scorecard sulla base delle tue metodologie di vendita. Dopo il setup, Aiclo lavora in autonomia.</p>
+          </details>
+          <details>
+            <summary>I dati delle trattative sono al sicuro?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <p>Aiclo è conforme al GDPR. I dati sono gestiti su server europei e nessun membro del nostro team, né terze parti, ha accesso alle conversazioni nel tuo account. Il controllo degli accessi è granulare: decidi tu chi vede cosa all’interno della piattaforma.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div class="footer-brand">
+        <svg class="logo" viewBox="0 0 153.04 46.37" aria-hidden="true"><use href="#logo"/></svg>
+        <p>Conversation Intelligence per i team di vendita.</p>
+      </div>
+      <nav aria-label="Prodotto"><h3>Prodotto</h3><a href="#come-funziona">Come funziona</a><a href="#venditore">Funzionalità</a><a href="https://www.aiclo.io/prezzi">Prezzi</a></nav>
+      <nav aria-label="Azienda"><h3>Azienda</h3><a href="https://www.aiclo.io/chi-siamo">Chi siamo</a><a href="#sicurezza">Sicurezza e Privacy</a><a href="https://www.aiclo.io/lavora-con-noi">Lavora con noi</a></nav>
+      <nav aria-label="Legale"><h3>Legale</h3><a href="https://www.aiclo.io/privacy-policy">Privacy Policy</a><a href="https://www.aiclo.io/cookie-policy">Cookie Policy</a><a href="https://www.aiclo.io/termini">Termini e Condizioni</a></nav>
+    </div>
+    <div class="wrap footer-legal">
+      <p>Aiclo S.r.l., Via Zoe Fontana 220, 00131 Roma (RM), P.IVA 18091661001 · Cap. soc. €10.000 i.v.</p>
+      <p>© 2025–2026 Aiclo S.r.l., tutti i diritti riservati.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
 </body>
 </html>

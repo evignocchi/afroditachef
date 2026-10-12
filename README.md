@@ -1,15 +1,15 @@
-# Afrodita Chef
+# Aiclo, landing page
 
-Static one-page site for the restaurant at Via Rialto 1b, Bologna. No build step.
+Static one-page site for Aiclo (Conversation Intelligence per i team di vendita). No build step.
 
 ```
 python3 -m http.server 8000   # then open http://localhost:8000
 ```
 
-## To replace before going live
+- `index.html`: the page. `css/styles.css`, `js/main.js`, `fonts/` (Sora, Onest, JetBrains Mono, self-hosted), `assets/`.
+- Copy, numbers and FAQ come from aiclo.io. Product UI in the panels is demo data.
 
-- `js/main.js`: `WHATSAPP_NUMBER` (digits with country code, e.g. `393331234567`). Currently a placeholder.
-- `index.html`: booking time slots (`#f-time`) are examples; set the real service hours.
-- `index.html`: the menu is indicative and has no prices. Names and descriptions are drafts, as are the ingredient callouts on the dish photo.
-- `assets/`: photos are the two supplied images plus crops of them (low resolution). Swap in more and larger photos.
-- Opening hours are not shown because they are unknown.
+## To check before going live
+
+- Demo CTAs point to `https://www.aiclo.io/#contatti`; footer links point to aiclo.io paths that should be verified.
+- App Store / Google Play links are generic store URLs: replace them with the real app pages.

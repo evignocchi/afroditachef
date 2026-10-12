@@ -8,41 +8,40 @@ web
 
 ## Stack
 
-Plain static HTML/CSS/JS, no build step (user's choice). Self-hosted fonts in `fonts/`.
+Plain static HTML/CSS/JS, no build step. Self-hosted variable fonts in `fonts/`, assets in `assets/`.
 
 ## Users
 
-People in and around Bologna (locals, students, visitors) choosing where to eat and wanting to book a table fast, mostly from a phone. Italian first, English second.
+Italian B2B sales leaders (direttori commerciali, sales manager) deciding whether to buy, and the sellers and field agents who would use it. They read on desktop at work and on the phone between appointments. Italian only.
 
 ## Product Purpose
 
-Showcase site for Afrodita Chef, a small restaurant at Via Rialto 1b, 40124 Bologna. It shows the room and the food, and turns interest into a table booking: the form composes a message and opens WhatsApp. Success is a booking request sent.
+Marketing landing page for Aiclo (aiclo.io), a conversation-intelligence platform for sales teams. Aiclo records every sales conversation (video calls via calendar, phone via integrated VoIP, in-person meetings via the iPhone/Android app), transcribes and scores it against configurable scorecards, gives managers a team dashboard and gives each seller targeted feedback, miniscripts, follow-up email and a CRM-ready summary. Success on the page is a demo request ("Richiedi una demo gratuita").
 
 ## Positioning
 
-A small, playful, pink-and-green restaurant ("cibo per passione") whose room is as recognisable as its plates: beige-striped walls, polka-dot lamps, a pink back room, pink napkins.
+Managers can only listen to about 5% of deals; Aiclo makes the other 95% visible. Growth tool, not a control tool. Works in person as well as in calls (a key differentiator).
 
 ## Operating Context
 
-Contacts: tel +39 051 23 24 23, sabina@afroditachef.it. Bookings go through WhatsApp (number still a placeholder). Site is bilingual IT/EN.
+Aiclo S.r.l., Via Zoe Fontana 220, 00131 Roma (RM), P.IVA 18091661001. App at app.aiclo.io. GDPR, servers in the EU, zero access by Aiclo staff, granular access control.
 
 ## Capabilities and Constraints
 
-- Booking form redirects to `wa.me` with the booking data prefilled in the active language.
-- Menu on the site is indicative; names and descriptions are drafts for the owner to correct. No prices published.
-- Opening hours, booking slots and the WhatsApp number are unconfirmed placeholders.
+- Every claim, number and FAQ answer comes from the live aiclo.io site: +200 teams, +10.000 trattative, +30 settori, 15 giorni, 100% / −80% / +25% / +33% (internal data, average on active customers), 60-day money-back guarantee, 100+ languages.
+- Demo request links point to the real site's contact flow; no form on this page.
+- Product UI shown on the page is demonstration data (Marco Rossi, Acme Corp) and labelled as demo.
 
 ## Brand Commitments
 
-Logo: heart-shaped chef hat, wide-tracked serif "AFRODITACHEF" in apple green, handwritten-feel "cibo per passione" in pink. Pink (~#E774B3 on the old site) and apple green (~#A8C870) are the brand pair. Colours were extracted from the logo, the old coming-soon page and the room photos.
+Logo: diamond "eye" mark plus lowercase "aiclo" wordmark, white on dark. Brand amber `#F9A517` with a lighter amber gradient on primary buttons in the app; recording red for the REC state. Dark product UI.
 
 ## Evidence on Hand
 
-Three assets from the owner: a photo of the room, a photo of one dish (orecchiette with green sauce, sausage, cheese crisps, an edible flower), and the logo. No testimonials, awards, history or prices are available: do not invent them.
+Logo SVG, favicon, a real screenshot of the mobile app recording screen, App Store and Google Play badges, the full copy of aiclo.io. No customer logos or testimonials with names: do not invent them.
 
 ## Product Principles
 
-- Booking is always one tap away.
-- Show real photos of the real room and food; never stock.
-- The room's own vocabulary (stripes, dots, scallops, pink) is the identity.
-- Italian and English are equal citizens.
+- Prove with the interface at work, not with adjectives.
+- Every number shown is a number Aiclo publishes.
+- One clear action: request a demo.
