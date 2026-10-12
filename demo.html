@@ -69,34 +69,30 @@
             <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>Feedback e frasi pronte</b> per ogni venditore, dopo ogni incontro</span></li>
             <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>Riepilogo per il CRM</b> già scritto, da incollare con un click</span></li>
           </ul>
-          <ul class="lp-trust">
-            <li><strong class="mono">+10.000</strong><span>trattative analizzate</span></li>
-            <li><strong class="mono">+30</strong><span>settori</span></li>
-            <li><strong class="mono">60 gg</strong><span>soddisfatti o rimborsati</span></li>
-          </ul>
+          <figure class="lp-mini-quote is-placeholder">
+            <span class="ph-tag">Segnaposto</span>
+            <blockquote>“Ora so esattamente dove intervenire con ogni venditore, senza passare le serate ad ascoltare registrazioni.”</blockquote>
+            <figcaption><span class="ph-avatar" aria-hidden="true"></span><span><b>[Nome Cognome]</b>[Ruolo], [Azienda]</span></figcaption>
+          </figure>
         </div>
 
         <div class="lp-form-col">
-          <form class="lp-form" id="demo-form" novalidate data-lead-form data-endpoint="/api/lead" aria-labelledby="form-title">
+          <form class="lp-form" id="demo-form" novalidate data-lead-form data-endpoint="/api/lead" data-booking-url="https://calendly.com/PLACEHOLDER-aiclo/demo-30-minuti" aria-labelledby="form-title">
             <div class="lp-form-head">
               <h2 id="form-title">Guarda Aiclo sulle tue trattative</h2>
               <p>Demo dal vivo di 30 minuti con uno specialista, sul tuo caso. Gratuita e senza impegno.</p>
             </div>
 
             <ol class="lp-progress" aria-label="Avanzamento">
-              <li class="is-current" data-progress="1"><span>1</span>Il tuo team</li>
-              <li data-progress="2"><span>2</span>I tuoi contatti</li>
+              <li class="is-current" data-progress="1"><span>1</span>Il team</li>
+              <li data-progress="2"><span>2</span>I tuoi dati</li>
+              <li data-progress="3"><span>3</span>L’orario</li>
             </ol>
 
             <fieldset class="lp-step" data-step="1">
-              <legend class="sr">Passo 1 di 2: il tuo team</legend>
+              <legend class="sr">Passo 1 di 3: il tuo team</legend>
               <div class="field">
-                <label for="f-email">Email aziendale</label>
-                <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="nome@azienda.it" required>
-                <p class="field-error" id="f-email-err" hidden></p>
-              </div>
-              <div class="field">
-                <span class="label" id="f-team-label">Quanti venditori ci sono nel team?</span>
+                <span class="label lp-q" id="f-team-label">Quanti venditori ci sono nel tuo team?</span>
                 <div class="chips" role="radiogroup" aria-labelledby="f-team-label">
                   <label class="chip"><input type="radio" name="team_size" value="1-5" required><span>1–5</span></label>
                   <label class="chip"><input type="radio" name="team_size" value="6-15"><span>6–15</span></label>
@@ -105,11 +101,16 @@
                 </div>
                 <p class="field-error" id="f-team-err" hidden></p>
               </div>
-              <button class="btn btn-primary btn-block" type="button" data-next>Continua <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+              <p class="lp-step-hint">Un tap e prepariamo la demo sulla dimensione del tuo team.</p>
             </fieldset>
 
             <fieldset class="lp-step" data-step="2" hidden>
-              <legend class="sr">Passo 2 di 2: i tuoi contatti</legend>
+              <legend class="sr">Passo 2 di 3: i tuoi dati</legend>
+              <div class="field">
+                <label for="f-email">Email aziendale</label>
+                <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="nome@azienda.it" required>
+                <p class="field-error" id="f-email-err" hidden></p>
+              </div>
               <div class="field-row">
                 <div class="field">
                   <label for="f-name">Nome e cognome</label>
@@ -142,20 +143,27 @@
               </div>
               <label class="consent" for="f-privacy">
                 <input id="f-privacy" name="privacy" type="checkbox" required>
-                <span>Ho letto l’<a href="https://www.aiclo.io/privacy-policy" target="_blank" rel="noopener">informativa privacy</a> e acconsento a essere contattato per fissare la demo.</span>
+                <span>Ho letto l’<a href="https://www.aiclo.io/privacy-policy" target="_blank" rel="noopener">informativa privacy</a> e acconsento a essere contattato per la demo.</span>
               </label>
               <p class="field-error" id="f-privacy-err" hidden></p>
               <div class="lp-step-actions">
                 <button class="btn btn-ghost btn-back" type="button" data-back>Indietro</button>
-                <button class="btn btn-primary btn-block" type="submit" data-submit><span>Prenota la mia demo gratuita</span> <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+                <button class="btn btn-primary btn-block" type="submit" data-submit><span>Scegli giorno e ora</span> <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
               </div>
               <p class="form-error" role="alert" data-form-error hidden></p>
             </fieldset>
 
+            <div class="lp-step lp-booking" data-booking hidden tabindex="-1">
+              <h3>Ultimo passo: scegli giorno e ora.</h3>
+              <p class="lp-booking-sub">Ti mandiamo l’invito con il link alla call a <strong data-success-email></strong>.</p>
+              <div class="lp-cal" data-cal></div>
+              <a class="link-arrow lp-cal-open" data-cal-link href="#" target="_blank" rel="noopener">Apri il calendario in una nuova scheda <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </div>
+
             <div class="lp-success" data-success hidden tabindex="-1">
               <span class="lp-success-icon"><svg aria-hidden="true"><use href="#i-check"/></svg></span>
-              <h3>Richiesta ricevuta.</h3>
-              <p>Uno specialista Aiclo ti scriverà all’indirizzo <strong data-success-email></strong> per fissare la demo nel giorno che preferisci.</p>
+              <h3>Demo prenotata.</h3>
+              <p>Trovi l’invito nella tua casella email. A presto!</p>
             </div>
 
             <input type="text" name="company_website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -168,15 +176,12 @@
         </div>
       </div>
 
-      <div class="wrap lp-channels">
-        <p>Registra ovunque vendi:</p>
+      <div class="wrap lp-logos is-placeholder">
+        <p>Scelto da oltre 200 team commerciali, in più di 30 settori</p>
         <ul>
-          <li><svg aria-hidden="true"><use href="#i-video"/></svg>Zoom</li>
-          <li><svg aria-hidden="true"><use href="#i-video"/></svg>Google Meet</li>
-          <li><svg aria-hidden="true"><use href="#i-video"/></svg>Microsoft Teams</li>
-          <li><svg aria-hidden="true"><use href="#i-phone"/></svg>Telefono</li>
-          <li><svg aria-hidden="true"><use href="#i-people"/></svg>Appuntamenti dal vivo</li>
+          <li>Logo cliente</li><li>Logo cliente</li><li>Logo cliente</li><li>Logo cliente</li><li>Logo cliente</li><li>Logo cliente</li>
         </ul>
+        <span class="ph-tag">Segnaposto</span>
       </div>
     </section>
 
@@ -206,6 +211,30 @@
             <span class="coverage-label" data-cov-label>delle trattative ascoltate da un manager</span>
           </p>
           <p class="fineprint">Ogni quadrato è una trattativa del mese.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIANZE -->
+    <section class="section lp-testi" aria-labelledby="testi-title">
+      <div class="wrap">
+        <h2 id="testi-title" class="h2 narrow">Cosa cambia per chi guida un team commerciale.</h2>
+        <div class="lp-testi-grid">
+          <figure class="lp-quote lp-quote-lead is-placeholder">
+            <span class="ph-tag">Segnaposto</span>
+            <blockquote>“Prima valutavo i venditori solo sui numeri a fine mese. Con Aiclo vedo cosa succede in ogni trattativa e il coaching è diventato concreto: in pochi mesi il team ha cambiato passo.”</blockquote>
+            <figcaption><span class="ph-avatar" aria-hidden="true"></span><span><b>[Nome Cognome]</b>[Direttore commerciale], [Azienda]</span></figcaption>
+          </figure>
+          <figure class="lp-quote is-placeholder">
+            <span class="ph-tag">Segnaposto</span>
+            <blockquote>“I miei agenti lavorano sul territorio. L’app registra gli incontri dal vivo e dopo ogni appuntamento ricevono il feedback.”</blockquote>
+            <figcaption><span class="ph-avatar" aria-hidden="true"></span><span><b>[Nome Cognome]</b>[Sales manager], [Azienda]</span></figcaption>
+          </figure>
+          <figure class="lp-quote is-placeholder">
+            <span class="ph-tag">Segnaposto</span>
+            <blockquote>“Il riepilogo per il CRM è pronto appena chiudo la call. Ho smesso di scrivere note a memoria.”</blockquote>
+            <figcaption><span class="ph-avatar" aria-hidden="true"></span><span><b>[Nome Cognome]</b>[Venditore], [Azienda]</span></figcaption>
+          </figure>
         </div>
       </div>
     </section>
@@ -301,6 +330,16 @@
             <p>Videocall dal calendario, telefonate dal VoIP integrato, incontri dal vivo dall’app per iPhone e Android. Aiclo lavora in autonomia.</p>
           </li>
         </ol>
+        <div class="lp-channels">
+          <p>Registra ovunque vendi:</p>
+          <ul>
+            <li><svg aria-hidden="true"><use href="#i-video"/></svg>Zoom</li>
+            <li><svg aria-hidden="true"><use href="#i-video"/></svg>Google Meet</li>
+            <li><svg aria-hidden="true"><use href="#i-video"/></svg>Microsoft Teams</li>
+            <li><svg aria-hidden="true"><use href="#i-phone"/></svg>Telefono</li>
+            <li><svg aria-hidden="true"><use href="#i-people"/></svg>Appuntamenti dal vivo</li>
+          </ul>
+        </div>
       </div>
     </section>
 
